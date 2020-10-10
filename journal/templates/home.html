@@ -1,0 +1,27 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>№</th>
+        <th>Дата</th>
+        <th>№ исх.</th>
+        <th>Кому</th>
+        <th>Содержание</th>
+        <th>Исполнитель</th>
+        <th>Автор регистрации</th>
+    </tr>
+    {% for item in object_list %}
+    <tr>
+        <td>{{ item.number }}</td>
+        <td>{{ item.date_time }}</td>
+        <td>{{ item.number_out }}</td>
+        <td>{{ item.to_whom }}</td>
+        <td>{{ item.what }}</td>
+        <td>{{ item.executor }}</td>
+        <td>{{ item.author }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
