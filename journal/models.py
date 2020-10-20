@@ -1,13 +1,20 @@
 from django.db import models
+from django.urls import reverse
+import datetime
 
 
 class Entry(models.Model):
+    """
+    Этот класс описывает модель записи в журнал регистрации документов.
+    Она описывает поля, содержащиеся в этой модели (т.е. фактически создаёт соотвествующие столбцы в базе данных)
+    """
 
     # Номер по списку
     number = models.IntegerField("№", default=0)
 
     # Дата и время регистрации записи
-    date_time = models.DateTimeField("Дата и время регистрации")
+    reg_date = models.DateField("Дата регистрации документа", default=datetime.date.today)
+    reg_time = models.TimeField("Время регистрации документа", default=datetime.time)
 
     # № исх.
     number_out = models.CharField("№ исх.", max_length=64, default=0)
@@ -30,3 +37,8 @@ class Entry(models.Model):
     def __str__(self):
         return self.number_out
 
+    # как работает эта хрень, я до конца не разобрался
+    # TODO: надо посмотреть матчасть
+    # Вроде как она позволяет отсылаться к определённому объекту через название его URL маршрута
+    def get_absolute_url(self):
+        return reverse('home')

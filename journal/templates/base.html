@@ -9,8 +9,14 @@
   </head>
   <body>
     <header>
-      <h1><a href="{% url 'home' %}">Журнал регистрации документов</a></h1>
-    </header>
+              <div class="nav-left">
+          <h1><a href="{% url 'home' %}">Журнал регистрации документов</a></h1>
+        </div>
+
+            <div class="nav-right">
+          <a href="{% url 'new_entry' %}">+ Зарегистрировать новый документ</a>
+        </div>
+      </header>
     <div>
       {% block content %}
       {% endblock content %}
