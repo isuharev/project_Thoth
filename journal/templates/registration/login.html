@@ -5,21 +5,35 @@
   <head>
     <title>Аутентификация</title>
       <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
   </head>
 
 
 <body>
 {% block content %}
 <header>
-        <h1>Войти в систему</h1>
+        <h1>Вход в систему</h1>
       </header>
     <form method="post">
-
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Войти</button>
 
+        {{ form.non_field_errors }}
+    <div class="usr_pwd">
+
+        <label for="{{ form.username.id_for_label }}">Логин:</label>
+        {{ form.username }}
+        {{ form.username.errors }}
+
+    </div>
+    <div class="usr_pwd">
+
+        <label for="{{ form.password.id_for_label }}">Пароль:</label>
+        {{ form.password }}
+        {{ form.password.errors }}
+    </div>
+
+
+        <button class="loginbtn" style="vertical-align:middle" type="submit"><span>Войти </span></button>
     </form>
 
 {% endblock content %}

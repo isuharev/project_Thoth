@@ -18,10 +18,9 @@
         </div>
 
         <a href="{% url 'admin:index' %}">Панель администратора</a>
+        <p><a href="{% url 'logout' %}">Выйти</a></p>
       </header>
           {% if user.is_authenticated %}
-        <p>Здравствуй, {{ user.first_name }}!</p>
-        <p><a href="{% url 'logout' %}">Выйти</a></p>
         <div>
       {% block content %}
         {% endblock content %}

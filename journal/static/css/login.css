@@ -1,0 +1,86 @@
+/* static/css/base.css */
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
+}
+
+header {
+  border-bottom: 1px solid #999;
+  margin-bottom: 2rem;
+  display: flex;
+}
+
+.loginbtn {
+  display: inline-block;
+  border-radius: 12px;
+  background-color: #4CAF50;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px;
+  padding: 20px;
+  width: 120px;
+  margin:auto;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.loginbtn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.loginbtn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.loginbtn:hover span {
+  padding-right: 25px;
+}
+
+.loginbtn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+input {
+  margin:10px 0;
+  padding:10px;
+  border-radius:10px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition: .3s box-shadow;
+  border: none;
+}
+
+input:focus {
+  background-color: #84fab3;
+  border-color: white;
+  // and any other style
+}
+
+label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: black;
+    display: inline-block;
+    padding-right:10px;
+}
+
+.usr_pwd{
+
+  clear:both;
+  text-align:center;
+  line-height:25px;
+}
