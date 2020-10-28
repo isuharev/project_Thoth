@@ -19,9 +19,16 @@
 
         <a href="{% url 'admin:index' %}">Панель администратора</a>
       </header>
-    <div>
+          {% if user.is_authenticated %}
+        <p>Здравствуй, {{ user.first_name }}!</p>
+        <p><a href="{% url 'logout' %}">Выйти</a></p>
+        <div>
       {% block content %}
-      {% endblock content %}
+        {% endblock content %}
     </div>
+      {% else %}
+        <p>Вы не вошли в систему. Ваш доступ к просмотру или редактированию журнала ограничен.</p>
+        <a href="{% url 'login' %}">Войти в систему</a>
+      {% endif %}
   </body>
 </html>
