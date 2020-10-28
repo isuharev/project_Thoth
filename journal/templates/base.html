@@ -16,6 +16,8 @@
             <div class="nav-right">
           <a href="{% url 'new_entry' %}">+ Зарегистрировать новый документ</a>
         </div>
+
+        <a href="{% url 'admin:index' %}">Панель администратора</a>
       </header>
     <div>
       {% block content %}

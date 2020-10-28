@@ -34,6 +34,11 @@ class Entry(models.Model):
         on_delete=models.CASCADE
     )
 
+    # Переопредилим название модели на панели администратора
+    class Meta:
+        verbose_name = 'Запись в журнале'     # Для единственного числа
+        verbose_name_plural = 'Записи в журнале'      # Для множественного числа
+
     def __str__(self):
         return self.number_out
 
