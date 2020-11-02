@@ -21,3 +21,9 @@ class JournalNewEntry(CreateView):
     model = Entry
     form_class = NewEntryForm
     template_name = 'new_entry.html'
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.author = self.request.user
+        obj.save()
+        return super(JournalNewEntry, self).form_valid(form)

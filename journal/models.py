@@ -12,9 +12,9 @@ class Entry(models.Model):
     # Номер по списку
     number = models.IntegerField("№", default=0)
 
-    # Дата и время регистрации записи
-    reg_date = models.DateField("Дата регистрации документа", default=datetime.date.today)
-    reg_time = models.TimeField("Время регистрации документа", default=datetime.time)
+    # Дата и время регистрации записи (эти поля модели заполняются автоматически, скрыто от пользователя)
+    reg_date = models.DateField(auto_now=True)
+    reg_time = models.TimeField(auto_now=True)
 
     # № исх.
     number_out = models.CharField("№ исх.", max_length=64, default=0)
