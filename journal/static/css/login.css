@@ -65,7 +65,7 @@ input {
 }
 
 input:focus {
-  background-color: #84fab3;
+  background-color: white;
   border-color: white;
   // and any other style
 }

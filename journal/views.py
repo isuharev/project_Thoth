@@ -11,7 +11,7 @@ class JournalView(ListView):
     """
     model = Entry
     template_name = 'home.html'
-    queryset = Entry.objects.all()
+    queryset = Entry.objects.all().order_by('-id')
 
 
 class JournalNewEntry(CreateView):

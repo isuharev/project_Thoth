@@ -1,11 +1,18 @@
 <!-- templates/base.html -->
 {% load static %}
 
+
 <html>
   <head>
     <title>Журнал ОГиГ</title>
       <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
+       <style>
+   body {
+    /* Градиент */
+    background: linear-gradient(#eae5c9, #6cc6cb) fixed;
+}
+  </style>
   </head>
   <body>
     <header>
@@ -21,7 +28,7 @@
         <p><a href="{% url 'logout' %}">Выйти</a></p>
       </header>
           {% if user.is_authenticated %}
-        <div>
+        <div align="center">
       {% block content %}
         {% endblock content %}
     </div>
