@@ -17,15 +17,16 @@
   <body>
     <header>
               <div class="nav-left">
-          <h1><a href="{% url 'home' %}">Журнал регистрации документов</a></h1>
+          <h1><a href="{% url 'home' %}" class="hyperlink" title="Переход к таблице">Журнал регистрации документов</a></h1>
         </div>
 
             <div class="nav-right">
-          <a href="{% url 'new_entry' %}">+ Зарегистрировать новый документ</a>
+          <a href="{% url 'new_entry' %}" class="hyperlink">+ Зарегистрировать новый документ</a>
+                        <a href="{% url 'admin:index' %}" class="hyperlink" title="Перейти в панель управления базой">Панель администратора</a>
+        <p><a href="{% url 'logout' %}" class="hyperlink" title="Выйти из системы">Выйти</a></p>
         </div>
 
-        <a href="{% url 'admin:index' %}">Панель администратора</a>
-        <p><a href="{% url 'logout' %}">Выйти</a></p>
+
       </header>
           {% if user.is_authenticated %}
         <div align="center">
@@ -34,7 +35,7 @@
     </div>
       {% else %}
         <p>Вы не вошли в систему. Ваш доступ к просмотру или редактированию журнала ограничен.</p>
-        <a href="{% url 'login' %}">Войти в систему</a>
+        <a href="{% url 'login' %}" class="hyperlink">Войти в систему</a>
       {% endif %}
   </body>
 </html>
