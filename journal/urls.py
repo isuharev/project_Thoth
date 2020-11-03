@@ -7,7 +7,7 @@ from django.contrib import admin
 urlpatterns = [
     path('', JournalView.as_view(), name='home'),
     path('entry/new/', JournalNewEntry.as_view(), name='new_entry'),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 admin.site.site_header = "Административная панель"
 admin.site.index_title = "Управление"

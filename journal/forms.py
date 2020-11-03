@@ -1,4 +1,3 @@
-from django.http import request
 from django import forms
 from .models import Entry
 

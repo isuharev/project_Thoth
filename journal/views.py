@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from .models import Entry
