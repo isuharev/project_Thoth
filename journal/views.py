@@ -24,5 +24,9 @@ class JournalNewEntry(CreateView):
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.author = self.request.user
+        try:
+            obj.departament = self.request.user.groups.get().name
+        except:
+            obj.departament = "не указан"
         obj.save()
         return super(JournalNewEntry, self).form_valid(form)

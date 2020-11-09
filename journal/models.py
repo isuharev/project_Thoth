@@ -8,7 +8,6 @@ class Entry(models.Model):
     Этот класс описывает модель записи в журнал регистрации документов.
     Она описывает поля, содержащиеся в этой модели (т.е. фактически создаёт соотвествующие столбцы в базе данных)
     """
-
     # Номер по списку
     number = models.IntegerField("№", default=0)
 
@@ -33,6 +32,9 @@ class Entry(models.Model):
         'auth.User',
         on_delete=models.CASCADE
     )
+
+    # Отдел
+    departament = models.CharField("Отдел", max_length=200, default='')
 
     # Переопредилим название модели на панели администратора
     class Meta:
