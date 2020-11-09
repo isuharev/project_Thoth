@@ -28,5 +28,6 @@ class JournalNewEntry(CreateView):
             obj.departament = self.request.user.groups.get().name
         except:
             obj.departament = "не указан"
+        print(">>>Entry added by ip:", self.request.META.get('REMOTE_ADDR'))
         obj.save()
         return super(JournalNewEntry, self).form_valid(form)
