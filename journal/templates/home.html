@@ -19,16 +19,33 @@
     </tr>
     {% for item in object_list %}
     <tr>
-        <td>{{ item.number }}</td>
-        <td>{{ item.reg_date }}</td>
-        <td>{{ item.reg_time }}</td>
-        <td>{{ item.number_out }}</td>
-        <td>{{ item.to_whom }}</td>
-        <td>{{ item.what }}</td>
-        <td>{{ item.executor }}</td>
-        <td>{{ item.departament }}</td>
-        <td>{{ item.author }}</td>
+        {% if user.username != "admin" %}
+                {% for group in user.groups.all %}
+                    {% if group.name == item.departament %}
+                        <td>{{ item.number }}</td>
+                        <td>{{ item.reg_date }}</td>
+                        <td>{{ item.reg_time }}</td>
+                        <td>{{ item.number_out }}</td>
+                        <td>{{ item.to_whom }}</td>
+                        <td>{{ item.what }}</td>
+                        <td>{{ item.executor }}</td>
+                        <td>{{ item.departament }}</td>
+                        <td>{{ item.author }}</td>
+                    {% endif %}
+                {% endfor %}
+        {% else %}
+            <td>{{ item.number }}</td>
+            <td>{{ item.reg_date }}</td>
+            <td>{{ item.reg_time }}</td>
+            <td>{{ item.number_out }}</td>
+            <td>{{ item.to_whom }}</td>
+            <td>{{ item.what }}</td>
+            <td>{{ item.executor }}</td>
+            <td>{{ item.departament }}</td>
+            <td>{{ item.author }}</td>
+        {% endif %}
     </tr>
+
     {% endfor %}
 </table>
 {% endblock content %}

@@ -24,6 +24,10 @@ class JournalNewEntry(CreateView):
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.author = self.request.user
+
+        """сделать так, чтобы программа научилась распозновать №исх., и по префиксу понимала, какой поставить отдел.
+         это нужно вдовесок к функционалу автоопределения отдела, 
+                чтобы условная Оля могла добавлять доки от нашего отдела"""
         try:
             obj.departament = self.request.user.groups.get().name
         except:
