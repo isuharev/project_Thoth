@@ -16,7 +16,7 @@ class Entry(models.Model):
     reg_time = models.TimeField(auto_now=True)
 
     # № исх.
-    number_out = models.CharField("№ исх.", max_length=64, default=0)
+    number_out = models.CharField("№ исх.", max_length=64, default='')
 
     # Адресант документа, для которого создаётся регистрационная запись
     to_whom = models.CharField("Кому", max_length=200, default='')

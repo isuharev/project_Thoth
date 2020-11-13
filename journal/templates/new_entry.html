@@ -73,16 +73,26 @@
         {% csrf_token %}
         <ul class="main">
 
-        <li class="fieldWrapper">
-        <label for="{{ form.number.id_for_label }}">Номер:</label>
-        {{ form.number }}
-        {{ form.number.errors }}
-        </li>
-
             <li class="fieldWrapper">
-        <label for="{{ form.number_out.id_for_label }}">№ Исх.:</label>
-        {{ form.number_out }}
-        {{ form.number_out.errors }}
+                {% if user.username != "admin" %}
+                {% for group in user.groups.all %}
+                    {% if group.name == "Гравиметрии" %}
+                        <label for="number_out">№ Исх.:</label>
+                        <input id="number_out" type="text" name="number_out" value="156/">
+                    {% else %}
+                        {% if group.name == "Геодинамики" %}
+                        <label for="number_out">№ Исх.:</label>
+                        <input id="number_out" type="text" name="number_out" value="155/">
+                        {% else %}
+                                        <label for="number_out">№ Исх.:</label>
+                        <input id="number_out" type="text" name="number_out" value="">
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                                                        <label for="number_out">№ Исх.:</label>
+                        <input id="number_out" type="text" name="number_out" value="">
+                {% endif %}
         </li>
 
             <li class="fieldWrapper">

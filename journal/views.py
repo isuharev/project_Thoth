@@ -25,13 +25,22 @@ class JournalNewEntry(CreateView):
         obj = form.save(commit=False)
         obj.author = self.request.user
 
-        """сделать так, чтобы программа научилась распозновать №исх., и по префиксу понимала, какой поставить отдел.
-         это нужно вдовесок к функционалу автоопределения отдела, 
-                чтобы условная Оля могла добавлять доки от нашего отдела"""
-        try:
-            obj.departament = self.request.user.groups.get().name
-        except:
-            obj.departament = "не указан"
+        n = Entry.objects.all().order_by('-id')
+        obj.number = n[0].number + 1
+
+        # Научим сайт определять отдел по префиксу исходящего номера
+        chk = obj.number_out.split("/")
+        if chk[0] == "155":
+            obj.departament = "Геодинамики"
+        elif chk[0] == "156":
+            obj.departament = "Гравиметрии"
+        else:
+            # Если по префиксу распознать не удаётся, то пробуем считать название отдела по имени группы
+            try:
+                obj.departament = self.request.user.groups.get().name
+            except:
+                # Если группа не указана, присвоим значение по умолчанию
+                obj.departament = "не указан"
         print(">>>Entry added by ip:", self.request.META.get('REMOTE_ADDR'))
         obj.save()
         return super(JournalNewEntry, self).form_valid(form)
