@@ -2,6 +2,9 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from .models import Entry
 from .forms import NewEntryForm
+from .services import get_current_number
+from .services import get_department_name
+from .services import get_some_last_model_elements
 
 
 class JournalView(ListView):
@@ -10,7 +13,7 @@ class JournalView(ListView):
     """
     model = Entry
     template_name = 'home.html'
-    queryset = Entry.objects.all().order_by('-id')
+    queryset = get_some_last_model_elements(obj=Entry, begin=0, end=50)
 
 
 class JournalNewEntry(CreateView):
@@ -25,22 +28,12 @@ class JournalNewEntry(CreateView):
         obj = form.save(commit=False)
         obj.author = self.request.user
 
-        n = Entry.objects.all().order_by('-id')
-        obj.number = n[0].number + 1
+        # Считали номер последней записи и через него получим номер новой записи, чтобы передать его в поле модели
+        obj.number = get_current_number(obj=Entry)
 
         # Научим сайт определять отдел по префиксу исходящего номера
-        chk = obj.number_out.split("/")
-        if chk[0] == "155":
-            obj.departament = "Геодинамики"
-        elif chk[0] == "156":
-            obj.departament = "Гравиметрии"
-        else:
-            # Если по префиксу распознать не удаётся, то пробуем считать название отдела по имени группы
-            try:
-                obj.departament = self.request.user.groups.get().name
-            except:
-                # Если группа не указана, присвоим значение по умолчанию
-                obj.departament = "не указан"
-        print(">>>Entry added by ip:", self.request.META.get('REMOTE_ADDR'))
+        obj.departament = get_department_name(obj=obj, request=self.request)
+
+        user_ip = self.request.META.get('REMOTE_ADDR')  # Считаем адрес пользователя
         obj.save()
         return super(JournalNewEntry, self).form_valid(form)
