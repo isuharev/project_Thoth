@@ -17,7 +17,7 @@ def get_department_name(obj, request):
     print(chk)
     if chk[0] == "155":
         return "Геодинамики"
-    elif chk[0] == "156":
+    elif chk[0] == "152":
         return "Гравиметрии"
     else:
         # Если по префиксу распознать не удаётся, то пробуем считать название отдела по имени группы
