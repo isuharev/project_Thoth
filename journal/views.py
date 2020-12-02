@@ -5,6 +5,7 @@ from .forms import NewEntryForm
 from .services import get_current_number
 from .services import get_department_name
 from .services import get_some_last_model_elements
+from .services import get_current_number_out
 
 
 class JournalView(ListView):
@@ -30,10 +31,26 @@ class JournalNewEntry(CreateView):
 
         # Считали номер последней записи и через него получим номер новой записи, чтобы передать его в поле модели
         obj.number = get_current_number(obj=Entry)
-
+        # TODO: надо сделать автоподстановку следующего № Исх. в форму
+        # print(get_current_number_out(obj=Entry))
         # Научим сайт определять отдел по префиксу исходящего номера
         obj.departament = get_department_name(obj=obj, request=self.request)
 
-        user_ip = self.request.META.get('REMOTE_ADDR')  # Считаем адрес пользователя
+        user_ip = self.request.META.get('REMOTE_ADDR')  # Счита ем адрес пользователя
         obj.save()
         return super(JournalNewEntry, self).form_valid(form)
+
+
+# TODO!!!!!! Это заглушки для отображения таблицы договоров и формы добавления договора
+# TODO их нужно будет наполнить собственной логикой
+class ContractsView(ListView):
+
+    model = Entry
+    template_name = 'contracts.html'
+    queryset = get_some_last_model_elements(obj=Entry, begin=0, end=50)
+
+
+class AddNewContactView(CreateView):
+    model = Entry
+    form_class = NewEntryForm
+    template_name = 'new_contract.html'

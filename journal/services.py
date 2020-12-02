@@ -6,6 +6,10 @@ def get_current_number(obj):
     return obj.objects.all().order_by('-id')[0].number + 1
 
 
+def get_current_number_out(obj):
+    return obj.objects.all().order_by('-id')[0].number_out
+
+
 def get_department_name(obj, request):
     """
     :param obj: объект формы, содержащий все её поля
@@ -14,7 +18,6 @@ def get_department_name(obj, request):
     """
     # Научим сайт определять отдел по префиксу исходящего номера
     chk = obj.number_out.split("/")
-    print(chk)
     if chk[0] == "155":
         return "Геодинамики"
     elif chk[0] == "152":

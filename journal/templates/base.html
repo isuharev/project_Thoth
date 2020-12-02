@@ -4,38 +4,91 @@
 
 <html>
   <head>
-    <title>Журнал ОГиГ</title>
+    <title>Журнал</title>
       <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
-       <style>
+      <link href="{% static 'css/base.css' %}" rel="stylesheet">
+      <link rel="shortcut icon" type="image/png" href="{% static "favicon.ico" %}">
+<style>
    body {
     /* Градиент */
     background: linear-gradient(#eae5c9, #6cc6cb) fixed;
 }
+
+ #navbar ul{
+        display: none;
+        position: absolute;
+        top: 100%;
+      }
+      #navbar li:hover ul { display: block; }
+      #navbar, #navbar ul{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+      #navbar {
+        height: 50px;
+        padding-left: 25px;
+        min-width: 470px;
+      }
+      #navbar li {
+        float: left;
+        position: relative;
+        height: 100%;
+      }
+      #navbar li a {
+        text-decoration: none;
+        display: inline-block;
+        padding: 5px 10px;
+        letter-spacing: 1px;
+        margin: 0 20px;
+        font-size: 24px;
+        transition: .3s ease-in-out;
+      }
+      #navbar ul li { float: none; }
+      #navbar li:hover { background-size: 100% 100%;}
+      #navbar ul li:hover { background-size: 100% 100%; }
   </style>
   </head>
   <body>
+
+{% if user.is_authenticated %}
     <header>
-              <div class="nav-left">
-          <h1><a href="{% url 'home' %}" class="hyperlink" title="Переход к таблице">Журнал регистрации документов</a></h1>
+
+        <div class="nav-left">
+            <h1><a href="{% url 'home' %}" class="hyperlink">Журнал регистрации документов</a></h1>
+            <h1><a href="{% url 'contract' %}" class="hyperlink">Журнал договоров</a></h1>
         </div>
 
-            <div class="nav-right">
-          <a href="{% url 'new_entry' %}" class="hyperlink">Зарегистрировать новый документ</a>
-                        <a href="{% url 'admin:index' %}" class="hyperlink" title="Перейти в панель управления базой">Панель администратора</a>
-        <p><a href="{% url 'logout' %}" class="hyperlink" title="Выйти из системы">Выйти</a></p>
+        <div class="nav-right">
+            <ul id="navbar">
+                <li><a href="{% url 'admin:index' %}" class="hyperlink">Администрирование</a></li>
+                <li><a class="hyperlink">Добавить новый</a>
+                    <ul>
+                        <li><a href="{% url 'new_entry' %}" class="hyperlink">Документ</a></li>
+                        <li><a href="{% url 'new_contract' %}" class="hyperlink">Договор</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'logout' %}" class="hyperlink">Выйти</a></li>
+            </ul>
         </div>
 
+    </header>
 
-      </header>
-          {% if user.is_authenticated %}
-        <div align="center">
-      {% block content %}
-        {% endblock content %}
-    </div>
-      {% else %}
-        <p>Вы не вошли в систему. Ваш доступ к просмотру или редактированию журнала ограничен.</p>
-        <a href="{% url 'login' %}" class="hyperlink">Войти в систему</a>
-      {% endif %}
+   <div align="center">
+       {% block content %}
+       {% endblock content %}
+   </div>
+{% else %}
+
+    <header>
+        <div class="nav-left">
+            <h1><a href="{% url 'home' %}" class="hyperlink">Журнал регистрации документов</a></h1>
+            <h1><a href="{% url 'contract' %}" class="hyperlink">Журнал договоров</a></h1>
+        </div>
+    </header>
+
+    <p>Вы не вошли в систему. Ваш доступ к просмотру или редактированию журнала ограничен.</p>
+    <a href="{% url 'login' %}" class="hyperlink">Войти в систему</a>
+{% endif %}
   </body>
 </html>
