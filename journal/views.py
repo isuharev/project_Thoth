@@ -29,12 +29,14 @@ class JournalNewEntry(CreateView):
         obj = form.save(commit=False)
         obj.author = self.request.user
 
-        # Считали номер последней записи и через него получим номер новой записи, чтобы передать его в поле модели
-        obj.number = get_current_number(obj=Entry)
         # TODO: надо сделать автоподстановку следующего № Исх. в форму
         # print(get_current_number_out(obj=Entry))
+
         # Научим сайт определять отдел по префиксу исходящего номера
         obj.departament = get_department_name(obj=obj, request=self.request)
+
+        # Считали номер последней записи и через него получим номер новой записи, чтобы передать его в поле модели
+        obj.number = get_current_number(obj=Entry, department=obj.departament)
 
         user_ip = self.request.META.get('REMOTE_ADDR')  # Счита ем адрес пользователя
         obj.save()

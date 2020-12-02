@@ -2,8 +2,16 @@
 # Если этот код работает, то его написал Сухарев-Крылов И.А., а если нет, то я не знаю, кто его написал
 
 
-def get_current_number(obj):
-    return obj.objects.all().order_by('-id')[0].number + 1
+def get_current_number(obj, department):
+    # Зададим номер по умолчанию
+    number = 0
+
+    for i in obj.objects.all().order_by('-id'):
+        if i.departament == department:
+            number = i.number + 1
+            break
+
+    return number
 
 
 def get_current_number_out(obj):
