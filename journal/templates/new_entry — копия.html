@@ -74,34 +74,48 @@
         <ul class="main">
 
             <li class="fieldWrapper">
-                {% if user.groups.get.name == "Геодинамики" %}
-                    <input id="number_out" type="text" name="number_out" value="155/">
-                {%else%}
-                    {% if user.groups.get.name == "Гравиметрии" %}
+                {% if user.username != "admin" %}
+                {% for group in user.groups.all %}
+                    {% if group.name == "Гравиметрии" %}
+                        <label for="number_out">№ Исх.:</label>
                         <input id="number_out" type="text" name="number_out" value="152/">
-                    {%else%}
-                        <input id="number_out" type="text" name="number_out" placeholder="№ Исх...">
-                    {%endif%}
-                {%endif%}
-            </li>
+                    {% else %}
+                        {% if group.name == "Геодинамики" %}
+                        <label for="number_out">№ Исх.:</label>
+                        <input id="number_out" type="text" name="number_out" value="155/">
+                        {% else %}
+                                        <label for="number_out">№ Исх.:</label>
+                        <input id="number_out" type="text" name="number_out" value="">
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                                                        <label for="number_out">№ Исх.:</label>
+                        <input id="number_out" type="text" name="number_out" value="" placeholder="№ Исх.">
+                {% endif %}
+        </li>
 
             <li class="fieldWrapper">
-                <input id="to_whom" type="text" name="to_whom" placeholder="Кому...">
-            </li>
+        <label for="{{ form.to_whom.id_for_label }}">Кому:</label>
+        {{ form.to_whom }}
+        {{ form.to_whom.errors }}
+        </li>
 
             <li class="fieldWrapper">
-                <input id="what" type="text" name="what" placeholder="Содержание...">
-
-            </li>
-
-            <li class="fieldWrapper">
-                <input id="executor" type="text" name="executor" placeholder="Содержание...">
-
-            </li>
+        <label for="{{ form.what.id_for_label }}">Содержание:</label>
+        {{ form.what }}
+        {{ form.what.errors }}
+        </li>
 
             <li class="fieldWrapper">
-                <input type="submit" value="Зарегистрировать" />
-            </li>
+        <label for="{{ form.executor.id_for_label }}">Исполнитель:</label>
+        {{ form.executor }}
+        {{ form.executor.errors }}
+        </li>
+
+<li class="fieldWrapper">
+      <input type="submit" value="Зарегистрировать" />
+    </li>
         </ul>
     </form>
 </div>

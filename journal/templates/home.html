@@ -5,8 +5,49 @@
 
 {% block content %}
 <link href="{% static 'css/home.css' %}" rel="stylesheet">
-<table>
-    <tr>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+#myInput {
+  background-image: url('/static/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 80%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+}
+
+
+</style>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Поиск по отделу...">
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("DocumentsTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[7];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+
+<table id="DocumentsTable" >
+    <tr class="header">
         <th>№</th>
         <th>Дата</th>
         <th>Время</th>
@@ -19,21 +60,6 @@
     </tr>
     {% for item in object_list %}
     <tr>
-        {% if user.username != "admin" %}
-                {% for group in user.groups.all %}
-                    {% if group.name == item.departament %}
-                        <td>{{ item.number }}</td>
-                        <td>{{ item.reg_date }}</td>
-                        <td>{{ item.reg_time }}</td>
-                        <td>{{ item.number_out }}</td>
-                        <td>{{ item.to_whom }}</td>
-                        <td>{{ item.what }}</td>
-                        <td>{{ item.executor }}</td>
-                        <td>{{ item.departament }}</td>
-                        <td>{{ item.author }}</td>
-                    {% endif %}
-                {% endfor %}
-        {% else %}
             <td>{{ item.number }}</td>
             <td>{{ item.reg_date }}</td>
             <td>{{ item.reg_time }}</td>
@@ -43,9 +69,7 @@
             <td>{{ item.executor }}</td>
             <td>{{ item.departament }}</td>
             <td>{{ item.author }}</td>
-        {% endif %}
     </tr>
-
     {% endfor %}
 </table>
 {% endblock content %}
