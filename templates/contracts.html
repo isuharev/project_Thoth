@@ -1,0 +1,31 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+
+
+<table id="DocumentsTable" >
+    <tr class="header">
+        <th>Номер</th>
+        <th>Дата</th>
+        <th>Отдел</th>
+        <th>Индекс</th>
+        <th>Автор записи</th>
+
+
+    </tr>
+    {% for item in object_list %}
+    <tr>
+            <td>{{ item.number }}</td>
+            <td>{{ item.contract_date }}</td>
+            <td>{{ item.departament }}</td>
+            <td>{{ item.contract_index }}</td>
+            <td>{{ item.author }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

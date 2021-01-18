@@ -43,7 +43,7 @@ class JournalNewEntry(CreateView):
         return super(JournalNewEntry, self).form_valid(form)
 
 
-# TODO!!!!!! Это заглушки для отображения таблицы договоров и формы добавления договора
+""""# TODO!!!!!! Это заглушки для отображения таблицы договоров и формы добавления договора
 # TODO их нужно будет наполнить собственной логикой
 class ContractsView(ListView):
 
@@ -55,4 +55,4 @@ class ContractsView(ListView):
 class AddNewContactView(CreateView):
     model = Entry
     form_class = NewEntryForm
-    template_name = 'new_contract.html'
+    template_name = 'new_contract.html'"""
