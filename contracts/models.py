@@ -10,6 +10,15 @@ class Contract(models.Model):
     # Дата заключения договора
     contract_date = models.DateField(auto_now=False)
 
+    # Исполнитель договора
+    executor = models.CharField("Исполнитель", max_length=200, default='')
+
+    # Стоимость контракта
+    contract_cost = models.CharField("Стоимость", max_length=200, default='')
+
+    # Статус контракта
+    contract_status = models.CharField("Статус договора", max_length=200, default='')
+
     # Дата регистрации договора в системе
     registration_date = models.DateField(auto_now=True)
 

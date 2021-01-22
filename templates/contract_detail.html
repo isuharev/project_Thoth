@@ -8,7 +8,7 @@
 <table id="DocumentsTable" >
   <tr>
 	<td class="header" colspan="2">
-		Данные по договору:
+		Данные по договору: {{contract.contract_full_name}}
 	</td>
   </tr>
   <tr>
@@ -20,9 +20,18 @@
 	</td>
   </tr>
 
+	  <tr>
+	<td>
+		Полный номер договора
+	</td>
+	<td>
+		{{contract.departament_code}}-{{contract.contract_index}}-{{contract.number}}
+	</td>
+  </tr>
+
   <tr>
 	<td>
-		Номер договора
+		Порядковый номер договора
 	</td>
 	<td>
 		{{contract.number}}
@@ -35,6 +44,32 @@
 	</td>
 	<td>
 		{{contract.contract_index}}
+	</td>
+  </tr>
+
+	<tr>
+	<td>
+		Исполнитель
+	</td>
+	<td>
+		{{contract.executor}}
+	</td>
+  </tr>
+		<tr>
+	<td>
+		Стоимость
+	</td>
+	<td>
+		{{contract.contract_cost}}
+	</td>
+  </tr>
+
+	<tr>
+	<td>
+		Текущий статус договора
+	</td>
+	<td>
+		{{contract.contract_status}}
 	</td>
   </tr>
 
