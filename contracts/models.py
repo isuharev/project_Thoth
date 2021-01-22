@@ -4,17 +4,26 @@ from django.urls import reverse
 
 class Contract(models.Model):
 
-    # Номер по списку
-    number = models.IntegerField("№", default=0)
+    # Порядковый номер договора
+    number = models.CharField("№", max_length=3, default='')
 
     # Дата заключения договора
     contract_date = models.DateField(auto_now=False)
+
+    # Дата регистрации договора в системе
+    registration_date = models.DateField(auto_now=True)
 
     # Отдел
     departament = models.CharField("Отдел", max_length=200, default='')
 
     # Код (индекс) договора по номенклатуре дел
-    contract_index = models.IntegerField("Индекс", default=0)
+    contract_index = models.CharField("Индекс", max_length=3, default='')
+
+    # Код отдела
+    departament_code = models.IntegerField("Код отдела", default=0)
+
+    # Полное название договора
+    contract_full_name = models.CharField("Полное название договора", max_length=200, default='')
 
     # Автор регистрационной записи
     author = models.ForeignKey(
@@ -32,4 +41,4 @@ class Contract(models.Model):
         return self.departament
 
     def get_absolute_url(self):
-        return reverse('home')
+        return reverse('contract')

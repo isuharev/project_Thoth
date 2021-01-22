@@ -1,13 +1,21 @@
-from django import forms
+from django.contrib.admin.widgets import AdminDateWidget
+from django.forms.fields import DateField
 from .models import Contract
+from django import forms
+
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 
 class NewContractForm(forms.ModelForm):
-    number_out = forms.CharField(max_length=64)
 
     class Meta:
         model = Contract
-        fields = ['contract_date', 'departament', 'contract_index']
+        fields = ['contract_date', 'departament_code', 'contract_index', 'contract_date', 'number']
+        widgets = {
+            'contract_date': DateInput(),
+        }
 
     def __init__(self, *args, **kwargs):
         super(NewContractForm, self).__init__(*args, **kwargs)

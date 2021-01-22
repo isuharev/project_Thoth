@@ -1,0 +1,76 @@
+<!-- templates/post_detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+<table id="DocumentsTable" >
+  <tr>
+	<td class="header" colspan="2">
+		Данные по договору:
+	</td>
+  </tr>
+  <tr>
+	<td>
+		Дата подписания договора
+	</td>
+	<td>
+		{{contract.contract_date}}
+	</td>
+  </tr>
+
+  <tr>
+	<td>
+		Номер договора
+	</td>
+	<td>
+		{{contract.number}}
+	</td>
+  </tr>
+
+    <tr>
+	<td>
+		Индекс по номенклатуре дел
+	</td>
+	<td>
+		{{contract.contract_index}}
+	</td>
+  </tr>
+
+    <tr>
+	<td class="header" colspan="2">
+		Служебная информация:
+	</td>
+  </tr>
+
+  <tr>
+	<td>
+		Дата регистрации договора
+	</td>
+	<td>
+		{{contract.registration_date}}
+	</td>
+  </tr>
+
+  <tr>
+	<td>
+		Код отдела
+	</td>
+	<td>
+		{{contract.departament_code}}
+	</td>
+  </tr>
+
+  <tr>
+	<td>
+		Автор регистрации договора
+	</td>
+	<td>
+		{{contract.author}}
+	</td>
+  </tr>
+
+
+</table>
+{% endblock content %}

@@ -9,21 +9,13 @@
 
 <table id="DocumentsTable" >
     <tr class="header">
-        <th>Номер</th>
-        <th>Дата</th>
-        <th>Отдел</th>
-        <th>Индекс</th>
-        <th>Автор записи</th>
+        <td>Список всех договоров</td>
 
 
     </tr>
     {% for item in object_list %}
     <tr>
-            <td>{{ item.number }}</td>
-            <td>{{ item.contract_date }}</td>
-            <td>{{ item.departament }}</td>
-            <td>{{ item.contract_index }}</td>
-            <td>{{ item.author }}</td>
+            <td><a href="{% url 'detail' item.pk %}">{{ item.contract_full_name }}</a></td>
 
     </tr>
     {% endfor %}
