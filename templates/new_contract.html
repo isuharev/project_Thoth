@@ -64,7 +64,7 @@
 
 </style>
 <div class="form__wrapper">
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
 
         {% csrf_token %}
         <ul class="main">
@@ -102,6 +102,11 @@
 
             <li class="fieldWrapper">
                 <input id="contract_status" type="text" name="contract_status" placeholder="Статус договора...">
+
+            </li>
+
+            <li class="fieldWrapper">
+                <input id="document" type="file" name="document" placeholder="Статус договора...">
 
             </li>
 

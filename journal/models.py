@@ -48,4 +48,4 @@ class Entry(models.Model):
     # TODO: надо посмотреть матчасть
     # Вроде как она позволяет отсылаться к определённому объекту через название его URL маршрута
     def get_absolute_url(self):
-        return reverse('home', kwargs={'pk': self.pk})
+        return reverse('home')

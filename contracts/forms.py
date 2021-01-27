@@ -19,7 +19,8 @@ class NewContractForm(forms.ModelForm):
                   'number',
                   'executor',
                   'contract_cost',
-                  'contract_status']
+                  'contract_status',
+                  'document']
         widgets = {
             'contract_date': DateInput(),
         }

@@ -8,7 +8,7 @@ class Contract(models.Model):
     number = models.CharField("№", max_length=3, default='')
 
     # Дата заключения договора
-    contract_date = models.DateField(auto_now=False)
+    contract_date = models.DateField("Дата заключения договора", auto_now=False, blank=True, null=True)
 
     # Исполнитель договора
     executor = models.CharField("Исполнитель", max_length=200, default='')
@@ -33,6 +33,10 @@ class Contract(models.Model):
 
     # Полное название договора
     contract_full_name = models.CharField("Полное название договора", max_length=200, default='')
+
+    # Файл договора и дата его подгрузки
+    document = models.FileField(upload_to='documents/contracts/', default='', blank=True)
+    uploaded_at = models.DateTimeField(auto_now=True)
 
     # Автор регистрационной записи
     author = models.ForeignKey(
