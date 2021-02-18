@@ -10,5 +10,4 @@ urlpatterns = [
     path('contracts/new/', AddNewContactView.as_view(), name='new_contract'),
     path('contracts/<int:pk>/', ContractDetailView.as_view(), name='detail')
 ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

@@ -74,15 +74,7 @@
         <ul class="main">
 
             <li class="fieldWrapper">
-                {% if user.groups.get.name == "Геодинамики" %}
-                    <input id="number_out" type="text" name="number_out" value="155/">
-                {%else%}
-                    {% if user.groups.get.name == "Гравиметрии" %}
-                        <input id="number_out" type="text" name="number_out" value="152/">
-                    {%else%}
-                        <input id="number_out" type="text" name="number_out" placeholder="№ Исх...">
-                    {%endif%}
-                {%endif%}
+                        <input id="number_out" type="text" name="number_out" value={{out}} >
             </li>
 
             <li class="fieldWrapper">
@@ -95,7 +87,7 @@
             </li>
 
             <li class="fieldWrapper">
-                <input id="executor" type="text" name="executor" placeholder="Содержание...">
+                <input id="executor" type="text" name="executor" placeholder="Исполнитель...">
 
             </li>
 

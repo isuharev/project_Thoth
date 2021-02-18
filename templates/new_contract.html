@@ -91,7 +91,16 @@
             </li>
 
             <li class="fieldWrapper">
-                <input id="executor" type="text" name="executor" placeholder="Исполнитель...">
+                <input id="contract_agent" type="text" name="contract_agent" placeholder="Контрагент...">
+
+            </li>
+
+            <li class="fieldWrapper">
+                <input id="executor"
+                       type="text"
+                       name="executor"
+                       placeholder="Исполнитель..."
+                       value={{user.first_name}}&thinsp;{{user.last_name}}>
 
             </li>
 
@@ -106,7 +115,7 @@
             </li>
 
             <li class="fieldWrapper">
-                <input id="document" type="file" name="document" placeholder="Статус договора...">
+                <input id="document" type="file" name="document">
 
             </li>
 

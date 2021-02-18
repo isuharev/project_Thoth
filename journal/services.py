@@ -1,8 +1,18 @@
 # 24.11.2020
 # Если этот код работает, то его написал Сухарев-Крылов И.А., а если нет, то я не знаю, кто его написал
 
+# Данный импорт нужен просто для удобства, чтобы отобразить тип возвращаемого значения для одной из функций ниже
+import django.db.models.query as query
 
-def get_current_number(obj, department):
+
+def get_next_number(obj, department) -> int:
+    """
+    Эта функция позволяет получить следующий номер по порядку для новой регистрационной записи в журнале
+    :param obj: объект формы, содержащий все её поля
+    :param department: переменная типа str, содержащая в себе название отдела,
+                                                                к которому будет привязан регистрируемый документ
+    :return: целочисленное значение номера для создаваемой записи
+    """
     # Зададим номер по умолчанию
     number = 0
 
@@ -14,12 +24,42 @@ def get_current_number(obj, department):
     return number
 
 
-def get_current_number_out(obj):
-    return obj.objects.all().order_by('-id')[0].number_out
-
-
-def get_department_name(obj, request):
+def get_current_number_out(obj, request) -> str:
     """
+    Эта функция определяет значение поле "№ Исх." для новой записи в журнале
+                                                                        на основе последней записи для данного отдела.
+    :param request: POST запрос от пользователя
+    :param obj: объект формы, содержащий все её поля
+    :return: строковое значение поля "№Исх."
+    """
+    current = "TEST!"
+    # Проверим, состоит ли пользователь в каком либо отделе
+    # Если состоит, то будем искать последний № Исх. для данного отдела в базе
+    # Если пользователь состоит в нескольких отделах, то отделом по умолчанию будем считать первый указанный
+    # Если не состоит, то вернём пустую строку
+
+    if request.user.groups.all():
+
+        department = request.user.groups.all()[0]
+
+        for entry in obj.objects.all().order_by('-id'):
+            if str(entry.departament).strip().lower() == str(department).strip().lower():
+                current = str(entry.number_out).split("/")[0] + "/" + str(int(str(entry.number_out).split("/")[1]) + 1)
+                break
+        else:
+            if str(department).strip().lower() == "гравиметрии":
+                current = "152/"
+            elif str(department).strip().lower() == "геодинамики":
+                current = "155/"
+            elif str(department).strip().lower() == "тестеры":
+                current = "Тестовый/"
+    return current
+
+
+def get_department_name(obj, request) -> str:
+    """
+    Эта функция определяет отдел,
+        для которого зарегистрировали новый документ по номеру отдела в поле "№Исх." или по группе самого пользователя
     :param obj: объект формы, содержащий все её поля
     :param request: POST запрос от пользователя
     :return: название отдела для новой записи в журнале
@@ -39,7 +79,7 @@ def get_department_name(obj, request):
             return "не указан"
 
 
-def get_some_last_model_elements(obj, begin: int, end: int):
+def get_some_last_model_elements(obj, begin: int, end: int) -> query.QuerySet:
     """
     Эта простенькая функция возвращает элементы заданной модели, заключённые в промежутке от begin до end
     :param obj: данная модель

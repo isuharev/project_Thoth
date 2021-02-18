@@ -13,7 +13,7 @@ class TimeInput(forms.TimeInput):
 # тут созданы виджеты для полей даты и времени
 # TODO: понять до конца, как это работает
 class NewEntryForm(forms.ModelForm):
-    number_out = forms.CharField(max_length=64)
+    number_out = forms.CharField(widget=forms.TextInput())
 
     class Meta:
         model = Entry

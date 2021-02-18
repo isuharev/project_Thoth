@@ -1,25 +1,22 @@
-import os
 from pathlib import Path
+import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Главная директория проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Сохраним секретный ключ в файл, и доставать его будем уже оттуда
+f = open('C:/Users/Пользователь/YandexDisk/MyCode/Django/project_Thoth/journal_db/key.crypt')
+key = f.readline()
+SECRET_KEY = key
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'c^#u2qfs_8h#0yi@(r#)!tigxz^$$v01(#paai9^6-4zstsh&0'
-
-# SECURITY WARNING: don't run with debug turned on in production!
+# Не стоит использовать это на проде, но пока что так :(
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.1.215",
-                 "192.168.4.137",
+ALLOWED_HOSTS = ["192.168.4.137",
                  "127.0.0.1"]
 
 
-# Application definition
+# Приложения, используемые в данном проекте
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -65,7 +62,6 @@ WSGI_APPLICATION = 'journal_db.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -117,3 +113,4 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

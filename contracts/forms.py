@@ -1,5 +1,3 @@
-from django.contrib.admin.widgets import AdminDateWidget
-from django.forms.fields import DateField
 from .models import Contract
 from django import forms
 
@@ -16,6 +14,7 @@ class NewContractForm(forms.ModelForm):
                   'departament_code',
                   'contract_index',
                   'contract_date',
+                  'contract_agent',
                   'number',
                   'executor',
                   'contract_cost',

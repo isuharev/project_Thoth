@@ -2,7 +2,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from .models import Entry
 from .forms import NewEntryForm
-from .services import get_current_number
+from .services import get_next_number
 from .services import get_department_name
 from .services import get_some_last_model_elements
 from .services import get_current_number_out
@@ -25,34 +25,23 @@ class JournalNewEntry(CreateView):
     form_class = NewEntryForm
     template_name = 'new_entry.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(JournalNewEntry, self).get_context_data(**kwargs)
+
+        current = get_current_number_out(obj=Entry, request=self.request)
+        context.update(out=current)
+        return context
+
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.author = self.request.user
-
-        # TODO: надо сделать автоподстановку следующего № Исх. в форму
-        # print(get_current_number_out(obj=Entry))
 
         # Научим сайт определять отдел по префиксу исходящего номера
         obj.departament = get_department_name(obj=obj, request=self.request)
 
         # Считали номер последней записи и через него получим номер новой записи, чтобы передать его в поле модели
-        obj.number = get_current_number(obj=Entry, department=obj.departament)
+        obj.number = get_next_number(obj=Entry, department=obj.departament)
 
-        user_ip = self.request.META.get('REMOTE_ADDR')  # Счита ем адрес пользователя
+        user_ip = self.request.META.get('REMOTE_ADDR')  # Считаем адрес пользователя
         obj.save()
         return super(JournalNewEntry, self).form_valid(form)
-
-
-""""# TODO!!!!!! Это заглушки для отображения таблицы договоров и формы добавления договора
-# TODO их нужно будет наполнить собственной логикой
-class ContractsView(ListView):
-
-    model = Entry
-    template_name = 'contracts.html'
-    queryset = get_some_last_model_elements(obj=Entry, begin=0, end=50)
-
-
-class AddNewContactView(CreateView):
-    model = Entry
-    form_class = NewEntryForm
-    template_name = 'new_contract.html'"""

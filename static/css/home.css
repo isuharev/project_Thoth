@@ -21,10 +21,15 @@ th, td {
 border-style: solid;
 border-width: 0 1px 1px 0;
 border-color: white;
+padding: 5px 10px;
 }
 td {
 background: #D8E6F3;
 }
 th:first-child, td:first-child {
+text-align: left;
+}
+
+.toleftedge {
 text-align: left;
 }

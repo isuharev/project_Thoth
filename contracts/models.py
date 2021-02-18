@@ -1,14 +1,44 @@
-from django.db import models
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 from django.urls import reverse
+from django.db import models
+import hashlib
+import os
+
+
+def upload_to(instance, filename, fieldname='document'):
+    ext = os.path.splitext(filename)[1].lower()
+    class_name = instance.__class__.__name__.lower()
+
+    h = hashlib.sha256()
+    field = getattr(instance, fieldname)
+    for chunk in field.chunks():
+        h.update(chunk)
+    name = h.hexdigest()
+
+    return os.path.join(
+        class_name,
+        name + ext,
+    )
+
+
+class OverwriteStorage(FileSystemStorage):
+    def get_available_name(self, name, max_length=None):
+        if self.exists(name):
+            os.remove(os.path.join(settings.MEDIA_ROOT, name))
+        return name
 
 
 class Contract(models.Model):
 
     # Порядковый номер договора
-    number = models.CharField("№", max_length=3, default='')
+    number = models.CharField("№", max_length=300, default='')
 
     # Дата заключения договора
     contract_date = models.DateField("Дата заключения договора", auto_now=False, blank=True, null=True)
+
+    # Контрагент, с которым заключён договор
+    contract_agent = models.CharField("Контрагент:", max_length=200, default='')
 
     # Исполнитель договора
     executor = models.CharField("Исполнитель", max_length=200, default='')
@@ -26,7 +56,7 @@ class Contract(models.Model):
     departament = models.CharField("Отдел", max_length=200, default='')
 
     # Код (индекс) договора по номенклатуре дел
-    contract_index = models.CharField("Индекс", max_length=3, default='')
+    contract_index = models.CharField("Индекс", max_length=3, default='', blank=True)
 
     # Код отдела
     departament_code = models.IntegerField("Код отдела", default=0)
@@ -35,7 +65,12 @@ class Contract(models.Model):
     contract_full_name = models.CharField("Полное название договора", max_length=200, default='')
 
     # Файл договора и дата его подгрузки
-    document = models.FileField(upload_to='documents/contracts/', default='', blank=True)
+    document = models.FileField(
+        storage=OverwriteStorage(),
+        upload_to=upload_to,
+        default='',
+        blank=True
+    )
     uploaded_at = models.DateTimeField(auto_now=True)
 
     # Автор регистрационной записи
