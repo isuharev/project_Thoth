@@ -11,7 +11,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('contract_date', 'executor', 'author', 'contract_status')
 
     # Добавим строку поиска, указав, по каким полям модели будет организован поиск
-    search_fields = ('executor', 'contract_status', 'author')
+    search_fields = ('executor', 'contract_status')
 
     # Добавим панель с иерархией дат, которая позволит быстро переключаться по годам
     date_hierarchy = 'contract_date'

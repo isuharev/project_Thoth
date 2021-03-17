@@ -13,5 +13,17 @@ class EntryResource(resources.ModelResource):
 class ImportExportAdmin(ExportMixin, admin.ModelAdmin):
     resource_class = EntryResource
 
+    # Отобразим поля модели в заголовке таблички на странице договоров (по имени полей в модели)
+    list_display = ('number', 'reg_date', 'to_whom', 'what', 'executor', 'author')
+
+    # Добавим фильтр по указанным ниже полям
+    list_filter = ('executor', 'author', 'to_whom')
+
+    # Добавим строку поиска, указав, по каким полям модели будет организован поиск
+    search_fields = ('executor', 'departament', 'to_whom')
+
+    # Добавим панель с иерархией дат, которая позволит быстро переключаться по годам
+    date_hierarchy = 'reg_date'
+
 
 admin.site.register(Entry, ImportExportAdmin)

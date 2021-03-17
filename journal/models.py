@@ -12,7 +12,7 @@ class Entry(models.Model):
     number = models.IntegerField("№", default=0)
 
     # Дата и время регистрации записи (эти поля модели заполняются автоматически, скрыто от пользователя)
-    reg_date = models.DateField(auto_now=True)
+    reg_date = models.DateField(auto_now=True, verbose_name="Дата регистрации")
     reg_time = models.TimeField(auto_now=True)
 
     # № исх.
