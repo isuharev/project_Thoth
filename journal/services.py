@@ -17,7 +17,7 @@ def get_next_number(obj, department) -> int:
     number = 0
 
     for i in obj.objects.all().order_by('-id'):
-        if i.departament == department:
+        if str(i.departament).strip().lower() == str(department).strip().lower():
             number = i.number + 1
             break
 

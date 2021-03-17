@@ -59,7 +59,7 @@ class Contract(models.Model):
     contract_index = models.CharField("Индекс", max_length=3, default='', blank=True)
 
     # Код отдела
-    departament_code = models.IntegerField("Код отдела", default=0)
+    departament_code = models.CharField("Код отдела",  max_length=100, default='')
 
     # Полное название договора
     contract_full_name = models.CharField("Полное название договора", max_length=200, default='')

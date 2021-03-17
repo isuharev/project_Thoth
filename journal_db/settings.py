@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'journal',
     'contracts',
     'import_export',
+    'django_archive',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -114,3 +116,7 @@ LOGOUT_REDIRECT_URL = 'home'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
