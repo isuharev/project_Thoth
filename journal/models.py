@@ -13,7 +13,7 @@ class Entry(models.Model):
 
     # Дата и время регистрации записи (эти поля модели заполняются автоматически, скрыто от пользователя)
     reg_date = models.DateField(auto_now=True, verbose_name="Дата регистрации")
-    reg_time = models.TimeField(auto_now=True)
+    reg_time = models.TimeField(auto_now=True, verbose_name="Время регистрации")
 
     # № исх.
     number_out = models.CharField("№ исх.", max_length=64, default='')
@@ -35,6 +35,9 @@ class Entry(models.Model):
 
     # Отдел
     departament = models.CharField("Отдел", max_length=200, default='')
+
+    # ip адрес пользователя
+    user_ip = models.GenericIPAddressField("IP адрес", default='не определён')
 
     # Переопредилим название модели на панели администратора
     class Meta:

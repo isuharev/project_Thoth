@@ -5,7 +5,7 @@ from .forms import NewEntryForm
 from .services import get_next_number
 from .services import get_department_name
 from .services import get_some_last_model_elements
-from .services import get_current_number_out
+from .services import get_new_number_out
 
 
 class JournalView(ListView):
@@ -28,7 +28,7 @@ class JournalNewEntry(CreateView):
     def get_context_data(self, **kwargs):
         context = super(JournalNewEntry, self).get_context_data(**kwargs)
 
-        current = get_current_number_out(obj=Entry, request=self.request)
+        current = get_new_number_out(obj=Entry, request=self.request)
         context.update(out=current)
         return context
 
@@ -42,6 +42,11 @@ class JournalNewEntry(CreateView):
         # Считали номер последней записи и через него получим номер новой записи, чтобы передать его в поле модели
         obj.number = get_next_number(obj=Entry, department=obj.departament)
 
-        user_ip = self.request.META.get('REMOTE_ADDR')  # Считаем адрес пользователя
+        # Сформировали окончательный вид № Исх. с учётом выбранного элемента списка индексов документов
+        obj.number_out = obj.number_out.split("/")[0] + "-" + self.request.POST['document_index'] + '/' + obj.number_out.split("/")[1]
+
+        # Считаем адрес пользователя
+        obj.user_ip = self.request.META.get('REMOTE_ADDR')
+        
         obj.save()
         return super(JournalNewEntry, self).form_valid(form)

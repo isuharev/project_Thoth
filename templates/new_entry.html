@@ -15,7 +15,7 @@
 }
 
 .form__wrapper {
-    width: 300px;
+    width: 640px;
     margin: 20px auto;
     border-radius: 5px;
     font-size: 16px;
@@ -38,7 +38,17 @@
 .fieldWrapper > input {
   flex: 2;*
   margin:10px 0;
-  padding:10px;
+  padding:15px;
+  border-radius:10px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition: .3s box-shadow;
+  border: none;
+}
+
+.fieldWrapper > select {
+  flex: 2;*
+  width: 100%;
+  padding:15px;
   border-radius:10px;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   transition: .3s box-shadow;
@@ -89,6 +99,22 @@
             <li class="fieldWrapper">
                 <input id="executor" type="text" name="executor" placeholder="Исполнитель...">
 
+            </li>
+
+            <li class="fieldWrapper">
+                <select id="document_index" name="document_index">
+                    <option  value="01">01 - Приказы и распоряжения вышестоящих организаций</option>
+                    <option  value="02">02 - Приказы и распоряжения директора Учреждения по основной деятельности</option>
+                    <option  value="03">03 - Положение об отделе и должностные инструкции. Копии.</option>
+                    <option  value="04">04 - ДСП. Переписка с организациями по вопросам деятельности отдела</option>
+                    <option  value="05">05 - Журнал регистрации документов (поручения, доклады, обзоры, сводки и пр)</option>
+                    <option  value="06" selected>06 - Документы по основной деятельности (служебные записки)</option>
+                    <option  value="07">07 - Документы по делопроизводству (передаточные описи, акты приёма-передачи и пр)</option>
+                    <option  value="08">08 - Журнал регистрации договоров подряда (относительно деятельности отдела)</option>
+                    <option  value="09">09 - Договоры подряда (копии)</option>
+                    <option  value="10">10 - Технические и научные отчёты по выполенным работам</option>
+                    <option  value="11">11 - Свидетельства о поверке приборов (сертификаты соответствия)</option>
+                </select>
             </li>
 
             <li class="fieldWrapper">

@@ -14,7 +14,7 @@ class ImportExportAdmin(ExportMixin, admin.ModelAdmin):
     resource_class = EntryResource
 
     # Отобразим поля модели в заголовке таблички на странице договоров (по имени полей в модели)
-    list_display = ('number', 'reg_date', 'to_whom', 'what', 'executor', 'author')
+    list_display = ('number', 'number_out', 'reg_date', 'reg_time', 'to_whom', 'what', 'executor', 'author', 'user_ip')
 
     # Добавим фильтр по указанным ниже полям
     list_filter = ('executor', 'author', 'to_whom')

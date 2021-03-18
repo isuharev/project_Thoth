@@ -24,7 +24,7 @@ def get_next_number(obj, department) -> int:
     return number
 
 
-def get_current_number_out(obj, request) -> str:
+def get_new_number_out(obj, request) -> str:
     """
     Эта функция определяет значение поле "№ Исх." для новой записи в журнале
                                                                         на основе последней записи для данного отдела.
@@ -44,7 +44,19 @@ def get_current_number_out(obj, request) -> str:
 
         for entry in obj.objects.all().order_by('-id'):
             if str(entry.departament).strip().lower() == str(department).strip().lower():
-                current = str(entry.number_out).split("/")[0] + "/" + str(int(str(entry.number_out).split("/")[1]) + 1)
+
+                if "-" in str(entry.number_out):
+                    # Если нам попался № Исх. нового образца вида "N-M/K", то приводим его в виду "N/K"
+                    # После чего приводим к виду "N/K+1", чтобы получился № Исх. для записи, которую создают сейчас
+                    number_out = str(entry.number_out).split("-")
+                    current = number_out[0] + '/'\
+                        + str(int(number_out[1].split("/")[1]) + 1)
+
+                else:
+                    # Если же попался № Исх. старого образца, вида "N/K", то приводим сразу к виду "N/K+1"
+                    current = str(entry.number_out).split("/")[0]\
+                              + "/"\
+                              + str(int(str(entry.number_out).split("/")[1]) + 1)
                 break
         else:
             if str(department).strip().lower() == "гравиметрии":
