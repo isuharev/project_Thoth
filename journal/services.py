@@ -100,3 +100,23 @@ def get_some_last_model_elements(obj, begin: int, end: int) -> query.QuerySet:
     :return: queryset с количеством элементов от begin до end
     """
     return obj.objects.all().order_by('-id')[begin:end]
+
+
+def format_field_to_whom(obj) -> str:
+    """
+    Эта функция скрыто от пользователя форматирует поле "Кому" после нажатия кнопки "зарегистрировать"
+
+    :param obj: строковая переменная, содержашая в себе значение поля "Кому"
+
+    :return: строковая переменная, содержашая в себе значение поля "Кому", форматированная по правилу:
+        Иванов И.И., если инициалы введены, либо без изменений, если таковых нет (т.е если ввели только фамилию)
+    """
+
+    if ' ' in obj:
+        obj = obj.split()
+        if '.' in obj[0]:
+            return obj[1] + " " + obj[0]
+        else:
+            return obj[0] + " " + obj[1]
+    else:
+        return obj

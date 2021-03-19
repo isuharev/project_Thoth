@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'import_export',
     'django_archive',
     'django_extensions',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -111,10 +113,22 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CKEDITOR_UPLOAD_PATH = '/media/content/ckeditor/'
+
+CKEDITOR_CONFIGS = {
+
+    'default': {
+
+     'toolbar': 'None'
+
+    },
+
+}
 
 GRAPH_MODELS = {
   'all_applications': True,

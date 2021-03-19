@@ -39,6 +39,7 @@ class Entry(models.Model):
     # ip адрес пользователя
     user_ip = models.GenericIPAddressField("IP адрес", default='не определён')
 
+
     # Переопредилим название модели на панели администратора
     class Meta:
         verbose_name = 'Запись в журнале'     # Для единственного числа

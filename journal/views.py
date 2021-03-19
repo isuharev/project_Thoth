@@ -6,6 +6,7 @@ from .services import get_next_number
 from .services import get_department_name
 from .services import get_some_last_model_elements
 from .services import get_new_number_out
+from .services import format_field_to_whom
 
 
 class JournalView(ListView):
@@ -45,8 +46,10 @@ class JournalNewEntry(CreateView):
         # Сформировали окончательный вид № Исх. с учётом выбранного элемента списка индексов документов
         obj.number_out = obj.number_out.split("/")[0] + "-" + self.request.POST['document_index'] + '/' + obj.number_out.split("/")[1]
 
+        obj.to_whom = format_field_to_whom(obj.to_whom)
+
         # Считаем адрес пользователя
         obj.user_ip = self.request.META.get('REMOTE_ADDR')
-        
+
         obj.save()
         return super(JournalNewEntry, self).form_valid(form)
