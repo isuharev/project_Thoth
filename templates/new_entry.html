@@ -77,21 +77,23 @@
         <ul class="main">
 
             <li class="fieldWrapper">
-                        <input id="number_out" type="text" name="number_out" value={{out}} >
+                <input id="number_out" type="text" name="number_out" value={{out}} >
+                {{form.number_out.errors}}
             </li>
 
             <li class="fieldWrapper">
                 <input id="to_whom" type="text" name="to_whom" placeholder="Кому...">
+                {{form.to_whom.errors}}
             </li>
 
             <li class="fieldWrapper">
                 <input id="what" type="text" name="what" placeholder="Содержание...">
-
+                {{form.what.errors}}
             </li>
 
             <li class="fieldWrapper">
                 <input id="executor" type="text" name="executor" placeholder="Исполнитель...">
-
+                {{form.executor.errors}}
             </li>
 
             <li class="fieldWrapper">
