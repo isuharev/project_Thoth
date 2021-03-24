@@ -25,19 +25,27 @@
 
         {{ form.non_field_errors }}
     <div class="usr_pwd">
+        <input id="id_username"
+               type="text"
+               name="username"
+               autofocus
+               autocomplete="username"
+               required
 
-        <label for="{{ form.username.id_for_label }}">Логин:</label>
-        {{ form.username }}
+               placeholder="Логин" >
         {{ form.username.errors }}
 
     </div>
     <div class="usr_pwd">
 
-        <label for="{{ form.password.id_for_label }}">Пароль:</label>
-        {{ form.password }}
+        <input id="id_password"
+               type="password"
+               name="password"
+               required
+               autocomplete="current-password"
+               placeholder="Пароль" >
         {{ form.password.errors }}
     </div>
-
 
         <button class="loginbtn" style="vertical-align:middle" type="submit"><span>Войти</span></button>
     </form>
