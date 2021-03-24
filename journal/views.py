@@ -48,7 +48,6 @@ class JournalNewEntry(CreateView):
 
         # Считаем адрес пользователя
         obj.user_ip = self.request.META.get('REMOTE_ADDR')
-        # print(self.request.META)
 
         obj.save()
         return super(JournalNewEntry, self).form_valid(form)
