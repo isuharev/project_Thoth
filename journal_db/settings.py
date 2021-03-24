@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'ckeditor',
     'ckeditor_uploader',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [

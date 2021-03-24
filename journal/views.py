@@ -2,11 +2,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from .models import Entry
 from .forms import NewEntryForm
-from .services import get_next_number
-from .services import get_department_name
-from .services import get_some_last_model_elements
-from .services import get_new_number_out
-from .services import format_field_to_whom
+from .services import *
 
 
 class JournalView(ListView):
@@ -44,12 +40,15 @@ class JournalNewEntry(CreateView):
         obj.number = get_next_number(obj=Entry, department=obj.departament)
 
         # Сформировали окончательный вид № Исх. с учётом выбранного элемента списка индексов документов
-        obj.number_out = obj.number_out.split("/")[0] + "-" + self.request.POST['document_index'] + '/' + obj.number_out.split("/")[1]
+        obj.number_out = obj.number_out.split("/")[0] \
+                         + "-" + self.request.POST['document_index'] \
+                         + '/' + obj.number_out.split("/")[1]
 
         obj.to_whom = format_field_to_whom(obj.to_whom)
 
         # Считаем адрес пользователя
         obj.user_ip = self.request.META.get('REMOTE_ADDR')
+        # print(self.request.META)
 
         obj.save()
         return super(JournalNewEntry, self).form_valid(form)
