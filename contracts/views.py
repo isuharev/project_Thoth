@@ -45,6 +45,7 @@ class AddNewContactView(CreateView):
                                         + "-" + str(obj.number)\
                                         + "/" + str(datetime.datetime.now().year)\
                                         + " от " + str(obj.contract_date)
+                
             else:
                 # Если в номере есть символ "/", значит у него уже есть год заключения и текущий год добавлять не нужно
                 obj.contract_full_name = str(obj.departament_code)\
