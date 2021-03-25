@@ -26,6 +26,7 @@ class AddNewContactView(CreateView):
 
         # Если указаны все данные, а номер договора не содержит символа "/", то формируем полное имя
         if obj.contract_index:
+            
             if "/" not in str(obj.number).strip():
                 obj.contract_full_name = str(obj.departament_code)\
                                         + "-" + str(obj.contract_index)\
