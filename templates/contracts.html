@@ -30,11 +30,8 @@
         <th>№ договора</th>
         <th>Дата заключения</th>
         <th>Контрагент</th>
-        <th>Исполнитель</th>
         <th>Стоимость</th>
         <th>Статус</th>
-        <th>Код отдела</th>
-        <th>Дата регистрации договора</th>
         <th>Автор регистрации</th>
     </tr>
     {% for item in object_list %}
@@ -43,11 +40,8 @@
             <td>{{ item.number }}</td>
             <td>{{ item.contract_date }}</td>
             <td>{{ item.contract_agent }}</td>
-            <td>{{ item.executor }}</td>
             <td>{{ item.contract_cost }}</td>
             <td>{{ item.contract_status }}</td>
-            <td>{{ item.departament_code }}</td>
-            <td>{{ item.registration_date }}</td>
             <td>{{ item.author }}</td>
     </tr>
     {% endfor %}

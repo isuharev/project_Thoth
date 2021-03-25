@@ -2,7 +2,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from .models import Entry
 from .forms import NewEntryForm
-from .services import *
+from .utils import *
 
 
 class JournalView(ListView):
