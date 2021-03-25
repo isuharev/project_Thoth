@@ -27,15 +27,12 @@ class AddNewContactView(CreateView):
 
         # Если указаны все данные, а номер договора не содержит символа "/", то формируем полное имя
         if obj.contract_index:
-
             if "/" not in str(obj.number).strip():
-                
                 obj.contract_full_name = str(obj.departament_code)\
                                         + "-" + str(obj.contract_index)\
                                         + "-" + str(obj.number)\
                                         + "/" + str(datetime.datetime.now().year)\
                                         + " от " + str(obj.contract_date)
-
             else:
 
                 # Если в номере есть символ "/", значит у него уже есть год заключения и текущий год добавлять не нужно
