@@ -20,24 +20,30 @@ class AddNewContactView(CreateView):
     template_name = 'new_contract.html'
 
     def form_valid(self, form):
+        
         obj = form.save(commit=False)
         obj.author = self.request.user
         obj.departament = "Не указан"
 
         # Если указаны все данные, а номер договора не содержит символа "/", то формируем полное имя
         if obj.contract_index:
+
             if "/" not in str(obj.number).strip():
+                
                 obj.contract_full_name = str(obj.departament_code)\
                                         + "-" + str(obj.contract_index)\
                                         + "-" + str(obj.number)\
                                         + "/" + str(datetime.datetime.now().year)\
                                         + " от " + str(obj.contract_date)
+
             else:
+
                 # Если в номере есть символ "/", значит у него уже есть год заключения и текущий год добавлять не нужно
                 obj.contract_full_name = str(obj.departament_code)\
                                         + "-" + str(obj.contract_index)\
                                         + "-" + str(obj.number)\
                                         + " от " + str(obj.contract_date)
+                
         else:
             # Если индекс договора не указан, то формируем имя без него
             if "/" not in str(obj.number).strip():
@@ -47,10 +53,12 @@ class AddNewContactView(CreateView):
                                         + " от " + str(obj.contract_date)
                 
             else:
+
                 # Если в номере есть символ "/", значит у него уже есть год заключения и текущий год добавлять не нужно
                 obj.contract_full_name = str(obj.departament_code)\
                                         + "-" + str(obj.number)\
                                         + " от " + str(obj.contract_date)
+
         obj.save()
         return super(AddNewContactView, self).form_valid(form)
 
