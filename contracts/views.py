@@ -38,6 +38,7 @@ class AddNewContactView(CreateView):
                                         + "-" + str(obj.contract_index)\
                                         + "-" + str(obj.number)\
                                         + " от " + str(obj.contract_date)
+                
         else:
             # Если индекс договора не указан, то формируем имя без него
             if "/" not in str(obj.number).strip():
