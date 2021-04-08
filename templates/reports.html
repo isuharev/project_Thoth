@@ -1,0 +1,39 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+</style>
+
+<table id="DocumentsTable" >
+    <tr class="header">
+        <th>№</th>
+        <th>Дата</th>
+        <th>№ документа</th>
+        <th>Документ</th>
+        <th>От кого\кому</th>
+        <th>Содержание</th>
+        <th>Примечание</th>
+        <th>Автор регистрации</th>
+    </tr>
+    {% for item in object_list %}
+    <tr>
+            <td>{{ item.number }}</td>
+            <td>{{ item.date|default:"Не указана" }}</td>
+            <td>{{ item.doc_number }}</td>
+            <td>{{ item.doc }}</td>
+            <td>{{ item.from_to }}</td>
+            <td>{{ item.what }}</td>
+            <td>{{ item.comment|default:"Нет" }}</td>
+            <td>{{ item.author }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

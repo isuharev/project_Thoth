@@ -3,9 +3,9 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 20px;
       /* Убираю отступы. */
-    margin:0px;
+    margin: 0px;
     /* Убираю еще отступы. */
-    padding:0px;
+    padding: 0px;
 }
 
 header {

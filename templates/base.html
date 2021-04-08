@@ -14,28 +14,28 @@
     background: linear-gradient(#eae5c9, #6cc6cb) fixed;
 }
 
- #navbar ul{
+ #add_bar ul{
         display: none;
         position: absolute;
         top: 100%;
       }
-      #navbar li:hover ul { display: block; }
-      #navbar, #navbar ul{
+      #add_bar li:hover ul { display: block; }
+      #add_bar, #add_bar ul{
         margin: 0;
         padding: 0;
         list-style-type: none;
       }
-      #navbar {
+      #add_bar {
         height: 50px;
         padding-left: 25px;
         min-width: 470px;
       }
-      #navbar li {
+      #add_bar li {
         float: left;
         position: relative;
         height: 100%;
       }
-      #navbar li a {
+      #add_bar li a {
         text-decoration: none;
         display: inline-block;
         padding: 5px 10px;
@@ -44,9 +44,43 @@
         font-size: 24px;
         transition: .3s ease-in-out;
       }
-      #navbar ul li { float: none; }
-      #navbar li:hover { background-size: 100% 100%;}
-      #navbar ul li:hover { background-size: 100% 100%; }
+      #add_bar ul li { float: none; }
+      #add_bar li:hover { background-size: 100% 100%;}
+      #add_bar ul li:hover { background-size: 100% 100%; }
+
+ #main_bar ul{
+        display: none;
+        position: absolute;
+        top: 100%;
+      }
+      #main_bar li:hover ul { display: block; }
+      #main_bar, #add_bar ul{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+      #main_bar {
+        height: 50px;
+        padding-left: 25px;
+        min-width: 470px;
+      }
+      #main_bar li {
+        float: left;
+        position: relative;
+        height: 100%;
+      }
+      #main_bar li a {
+        text-decoration: none;
+        display: inline-block;
+        padding: 5px 10px;
+        letter-spacing: 1px;
+        margin: 0 20px;
+        font-size: 24px;
+        transition: .3s ease-in-out;
+      }
+      #main_bar ul li { float: none; }
+      #main_bar li:hover { background-size: 100% 100%;}
+      #main_bar ul li:hover { background-size: 100% 100%; }
   </style>
   </head>
   <body>
@@ -56,15 +90,16 @@
 
         <div class="nav-left">
             <h1><a href="{% url 'home' %}" class="hyperlink">Журнал регистрации документов</a></h1>
+            <h1><a href="{% url 'reports' %}" class="hyperlink">Журнал регистрации отчётных документов</a></h1>
             <h1><a href="{% url 'contract' %}" class="hyperlink">Журнал договоров</a></h1>
         </div>
-
         <div class="nav-right">
-            <ul id="navbar">
+            <ul id="add_bar">
                 <li><a href="{% url 'admin:index' %}" class="hyperlink">Администрирование</a></li>
                 <li><a class="hyperlink">Добавить новый</a>
                     <ul>
                         <li><a href="{% url 'new_entry' %}" class="hyperlink">Документ</a></li>
+                        <li><a href="{% url 'new_report' %}" class="hyperlink">Отчётный документ</a></li>
                         <li><a href="{% url 'new_contract' %}" class="hyperlink">Договор</a></li>
                     </ul>
                 </li>
