@@ -1,53 +1,57 @@
 <!-- templates/registration/login.html -->
 {% load static %}
 <html>
-
   <head>
     <title>Аутентификация</title>
+
       <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
-    <link href="{% static 'css/login.css' %}" rel="stylesheet">
-             <style>
-   body {
-    /* Градиент */
-    background: linear-gradient(#eae5c9, #6cc6cb) fixed;
-}
-  </style>
+      <link href="{% static 'css/base.css' %}" rel="stylesheet">
+      <link href="{% static 'css/login.css' %}" rel="stylesheet">
+
   </head>
 
 
-<body>
-{% block content %}
-<header>
+  <body>
+
+    {% block content %}
+    <header class="login_header">
+
         <h1>Вход в систему</h1>
-</header>
-<form method="post">
+
+    </header>
+
+    <form method="post">
+
         {% csrf_token %}
         {{ form.non_field_errors }}
 
-    <div class="usr_pwd">
-        <input id="id_username"
-               type="text"
-               name="username"
-               autofocus
-               autocomplete="username"
-               required
-               placeholder="Логин" >
-        {{ form.username.errors }}
-    </div>
+        <div class="usr_pwd">
+            <input id="id_username"
+                   type="text"
+                   name="username"
+                   autofocus
+                   autocomplete="username"
+                   required
+                   placeholder="Логин" >
+            {{ form.username.errors }}
+        </div>
 
-    <div class="usr_pwd">
-        <input id="id_password"
-               type="password"
-               name="password"
-               required
-               autocomplete="current-password"
-               placeholder="Пароль" >
-        {{ form.password.errors }}
-    </div>
+        <div class="usr_pwd">
+            <input id="id_password"
+                   type="password"
+                   name="password"
+                   required
+                   autocomplete="current-password"
+                   placeholder="Пароль" >
+            {{ form.password.errors }}
+        </div>
 
-    <button class="loginbtn" style="vertical-align:middle" type="submit"><span>Войти</span></button>
-</form>
+        <button class="login_button" style="vertical-align:middle" type="submit">
+            <span>Войти</span>
+        </button>
 
-{% endblock content %}
+    </form>
+
+    {% endblock content %}
   </body>
 </html>

@@ -33,3 +33,18 @@ text-align: left;
 .toleftedge {
 text-align: left;
 }
+
+* {
+  box-sizing: border-box;
+}
+#search_input {
+  background-image: url('/static/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 60%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+}

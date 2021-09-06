@@ -4,49 +4,91 @@
 
 
 {% block content %}
-<link href="{% static 'css/home.css' %}" rel="stylesheet">
+    <link href="{% static 'css/home.css' %}" rel="stylesheet">
 
-<style>
-* {
-  box-sizing: border-box;
-}
-#myInput {
-  background-image: url('/static/searchicon.png');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  width: 60%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-  box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
-}
+    <input type="text" id="search_input" onkeyup="myFunction()" placeholder="Поиск по отделу...">
 
+    <script>
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("search_input");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("DocumentsTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[7];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 
-</style>
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Поиск по отделу...">
-
-<script>
-function myFunction() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
+    <script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("DocumentsTable");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[7];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Сделайте цикл, который будет продолжаться до тех пор, пока
+  никакого переключения не было сделано: */
+  while (switching) {
+    // Начните с того, что скажите: переключение не выполняется:
+    switching = false;
+    rows = table.rows;
+    /* Цикл через все строки таблицы (за исключением
+    во-первых, который содержит заголовки таблиц): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Начните с того, что не должно быть никакого переключения:
+      shouldSwitch = false;
+      /* Получите два элемента, которые вы хотите сравнить,
+      один из текущей строки и один из следующей: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Проверьте, должны ли две строки поменяться местами,
+      основанный на направлении, asc или desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // Если это так, отметьте как переключатель и разорвать цикл:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // Если это так, отметьте как переключатель и разорвать цикл:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* Если переключатель был отмечен, сделайте переключатель
+      и отметьте, что переключатель был сделан: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Каждый раз, когда выполняется переключение, увеличьте это число на 1:
+      switchcount ++;
+    } else {
+      /* Если переключение не было сделано и направление "asc",
+      установите направление на "desc" и снова запустите цикл while. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
       }
     }
   }
 }
+
+
 </script>
 
-<table id="DocumentsTable" >
+    <table class="table_sort" id="DocumentsTable" >
+    <thead>
     <tr class="header">
         <th>№</th>
         <th>Дата</th>
@@ -55,10 +97,12 @@ function myFunction() {
         <th>Кому</th>
         <th>Содержание</th>
         <th>Исполнитель</th>
-        <th>Отдел</th>
-        <th>Автор регистрации</th>
+        <th onclick="sortTable(7)">Отдел</th>
+        <th onclick="sortTable(8)">Автор регистрации</th>
     </tr>
+    </thead>
     {% for item in object_list %}
+    <tbody>
     <tr>
             <td>{{ item.number }}</td>
             <td>{{ item.reg_date }}</td>
@@ -70,6 +114,7 @@ function myFunction() {
             <td>{{ item.departament }}</td>
             <td class="toleftedge">{{ item.author }}</td>
     </tr>
+    </tbody>
     {% endfor %}
 </table>
 {% endblock content %}

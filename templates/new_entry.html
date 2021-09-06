@@ -1,75 +1,12 @@
 <!-- Шаблон для страницы с добавлением новой записи в базу -->
 {% extends 'base.html' %}
+{% load static %}
 
 
 {% block content %}
-    <h1>Регистрация нового документа</h1>
+<h1>Регистрация нового документа</h1>
+<link href="{% static 'css/new_entry.css' %}" rel="stylesheet">
 
-<style>
-
-.form__wrapper {
-    width: 660px;
-    margin: 20px auto;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-
-.main {
-  list-style-type: none;
-}
-.fieldWrapper {
-    display: flex;
-    justify-content: flex-end;
-    padding: 8px;
-}
-.fieldWrapper > label {
-    padding: 8px 16px 8px 0;
-    flex: 1;
-}
-
-.fieldWrapper > input {
-  flex: 2;*
-  margin:10px 0;
-  padding:15px;
-  border-radius:10px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  transition: .3s box-shadow;
-  border: none;
-}
-
-.fieldWrapper > select {
-  flex: 2;*
-  width: 100%;
-  padding:15px;
-  border-radius:10px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  transition: .3s box-shadow;
-  border: none;
-}
-
-.fieldWrapper > input:focus {
-  background-color: white;
-  border-color: white;
-}
-
-.fieldWrapper > input[type="submit"] {
-    padding:10px;
-    border-radius:10px;
-    margin:auto;
-    width:200px;
-}
-.fieldWrapper > input[type="submit"]:focus {
-  background-color: white;
-  border-color: black;
-  // and any other style
-}
-
-.fieldWrapper > input[type="submit"]:hover  {
-   border-color: black;
-}
-
-</style>
 <div class="form__wrapper">
     <form action="" method="post">
 
@@ -79,21 +16,6 @@
             <li class="fieldWrapper">
                 <input id="number_out" type="text" name="number_out" value={{out}} >
                 {{form.number_out.errors}}
-            </li>
-
-            <li class="fieldWrapper">
-                <input id="to_whom" type="text" name="to_whom" placeholder="Кому...">
-                {{form.to_whom.errors}}
-            </li>
-
-            <li class="fieldWrapper">
-                <input id="what" type="text" name="what" placeholder="Содержание...">
-                {{form.what.errors}}
-            </li>
-
-            <li class="fieldWrapper">
-                <input id="executor" type="text" name="executor" placeholder="Исполнитель...">
-                {{form.executor.errors}}
             </li>
 
             <li class="fieldWrapper">
@@ -110,6 +32,21 @@
                     <option  value="10">10 - Технические и научные отчёты по выполенным работам</option>
                     <option  value="11">11 - Свидетельства о поверке приборов (сертификаты соответствия)</option>
                 </select>
+            </li>
+
+            <li class="fieldWrapper">
+                <input id="to_whom" type="text" name="to_whom" placeholder="Кому...">
+                {{form.to_whom.errors}}
+            </li>
+
+            <li class="fieldWrapper">
+                <input id="what" type="text" name="what" placeholder="Содержание...">
+                {{form.what.errors}}
+            </li>
+
+            <li class="fieldWrapper">
+                <input id="executor" type="text" name="executor" placeholder="Исполнитель...">
+                {{form.executor.errors}}
             </li>
 
             <li class="fieldWrapper">

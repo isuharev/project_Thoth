@@ -120,3 +120,17 @@ def format_field_to_whom(obj) -> str:
             return obj[0] + " " + obj[1]
     else:
         return obj
+
+
+def get_user_ip(request):
+    """
+    Эта функция пытается определить ip адрес пользователя, создающего новую запись в журнале регистрации документов
+    :param request: POST запрос
+    :return: ip адрес пользователя
+    """
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip

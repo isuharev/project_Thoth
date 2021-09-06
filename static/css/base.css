@@ -1,11 +1,14 @@
 /* static/css/base.css */
+
 body {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 20px;
       /* Убираю отступы. */
     margin: 0px;
-    /* Убираю еще отступы. */
     padding: 0px;
+
+    /* Градиент */
+  background: linear-gradient(#eae5c9, #6cc6cb) fixed;
 }
 
 header {
@@ -24,8 +27,6 @@ header h1 a {
 .nav-left {
   margin-right: auto;
 }
-
-
 
 .post-entry {
   margin-bottom: 2rem;
@@ -50,7 +51,6 @@ header h1 a {
   color: black;
 }
 
-
 a {
   text-decoration: none;
   display: inline-block;
@@ -61,7 +61,6 @@ a {
   transition: .3s ease-in-out;
 }
 
-
 .hyperlink {
   border-bottom: 2px solid #5be;
   color: #555;
@@ -71,3 +70,37 @@ a {
   background-size: 100% 0%;
 }
 .hyperlink:hover {background-size: 100% 100%;}
+
+ #add_bar ul{
+display: none;
+position: absolute;
+top: 100%;
+}
+#add_bar li:hover ul { display: block; }
+#add_bar, #add_bar ul{
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+#add_bar {
+height: 50px;
+padding-left: 25px;
+min-width: 470px;
+}
+#add_bar li {
+float: left;
+position: relative;
+height: 100%;
+}
+#add_bar li a {
+text-decoration: none;
+display: inline-block;
+padding: 5px 10px;
+letter-spacing: 1px;
+margin: 0 20px;
+font-size: 24px;
+transition: .3s ease-in-out;
+}
+#add_bar ul li { float: none; }
+#add_bar li:hover { background-size: 100% 100%;}
+#add_bar ul li:hover { background-size: 100% 100%; }

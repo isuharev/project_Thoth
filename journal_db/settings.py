@@ -5,7 +5,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Сохраним секретный ключ в файл, и доставать его будем уже оттуда
-f = open('C:/Users/Пользователь/YandexDisk/MyCode/Django/project_Thoth/journal_db/key.crypt')
+f = open('C:/Users/ivansk/YandexDisk/MyCode/Django/project_Thoth/journal_db/key.crypt')
 key = f.readline()
 SECRET_KEY = key
 
@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'bootstrap3',
+    # 'simple_history',
 ]
 
 MIDDLEWARE = [
@@ -44,6 +45,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'journal_db.urls'

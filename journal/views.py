@@ -47,7 +47,8 @@ class JournalNewEntry(CreateView):
         obj.to_whom = format_field_to_whom(obj.to_whom)
 
         # Считаем адрес пользователя
-        obj.user_ip = self.request.META.get('REMOTE_ADDR')
+        # obj.user_ip = self.request.META.get('REMOTE_ADDR')
+        obj.user_ip = get_user_ip(self.request)
         obj.save()
 
         return super(JournalNewEntry, self).form_valid(form)

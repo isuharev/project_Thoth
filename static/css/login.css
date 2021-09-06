@@ -1,16 +1,14 @@
 /* static/css/base.css */
-body {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 20px;
-}
 
-header {
+/* body управляется из base.css */
+
+.login_header {
   border-bottom: 1px solid #999;
   margin-bottom: 2rem;
   display: flex;
 }
 
-.loginbtn {
+.login_button {
   display: inline-block;
   border-radius: 12px;
   background-color: #4CAF50;
@@ -30,14 +28,14 @@ header {
   transform: translate(-50%, 0);
 }
 
-.loginbtn span {
+.login_button span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.loginbtn span:after {
+.login_button span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -46,11 +44,11 @@ header {
   transition: 0.5s;
 }
 
-.loginbtn:hover span {
+.login_button:hover span {
   padding-right: 25px;
 }
 
-.loginbtn:hover span:after {
+.login_button:hover span:after {
   opacity: 1;
   right: 0;
 }

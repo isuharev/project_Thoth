@@ -10,6 +10,7 @@ box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
 th{
   position: sticky;
   top: 0px;
+  cursor: pointer;
 }
 
 th, td:first-child {
