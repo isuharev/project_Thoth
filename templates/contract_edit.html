@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+ 
+{% block content %}
+
+<link href="{% static 'css/contract_edit.css' %}" rel="stylesheet">
+<h1>Редактирование договора {{contract.contract_full_name}}</h1>
+<div class="form__wrapper">
+    <form action="" method="post">
+        {% csrf_token %}
+        <ul class="main">
+
+            <li class="fieldWrapper">
+                <label for="number">Номер договора</label>
+                <input id="number" type="text" name="number" value="{{contract.number}}">
+            </li>
+
+            <li class="fieldWrapper">
+                <label for="departament_code">Код отдела</label>
+                <input id="departament_code" type="text" name="departament_code" value="{{contract.departament_code}}">
+            </li>
+
+            <li class="fieldWrapper">
+                <label for="contract_index">Индекс договора</label>
+                <input id="contract_index" type="text" name="contract_index" value="{{contract.contract_index}}">
+            </li>
+
+            <li class="fieldWrapper">
+                <label for="contract_agent">Контрагент</label>
+                <input id="contract_agent" type="text" name="contract_agent" value="{{contract.contract_agent}}">
+            </li>
+
+            <li class="fieldWrapper">
+                <label for="executor">Исполнитель</label>
+                <input id="executor" type="text" name="executor" value="{{contract.executor}}">
+
+            <li class="fieldWrapper">
+                <label for="contract_date">Дата заключения</label>
+                <input type="date" name="contract_date" value={{out}} id="contract_date">
+            </li>
+
+            <li class="fieldWrapper">
+                <label for="contract_status">Статус договора</label>
+                <select id="contract_status" name="contract_status">
+                    <option selected="selected" value="{{contract.contract_status}}">{{contract.contract_status}}</option>
+                    <option  value="Согласование">Согласование</option>
+                    <option  value="Заключён, в работе">Заключён, в работе</option>
+                    <option  value="Разорван">Разорван</option>
+                    <option  value="Исполнен">Исполнен</option>
+                    <option  value="Не заключён">Не заключён</option>
+                </select>
+            </li>
+
+            <li class="fieldWrapper">
+                <label for="contract_cost">Стоимость договора</label>
+                <input id="contract_cost" type="text" name="contract_cost" value="{{contract.contract_cost}}">
+            </li>
+
+            <li class="fieldWrapper">
+                <input type="submit" value="Подтвердить" />
+            </li>
+        </ul>
+</form>
+</div>
+{% endblock content %}

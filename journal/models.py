@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from simple_history.models import HistoricalRecords
 import datetime
 
 
@@ -38,6 +39,9 @@ class Entry(models.Model):
 
     # ip адрес пользователя
     user_ip = models.GenericIPAddressField("IP адрес", default='не определён')
+
+    # Логирование изменений
+    history = HistoricalRecords()
 
     # Переопредилим название модели на панели администратора
     class Meta:

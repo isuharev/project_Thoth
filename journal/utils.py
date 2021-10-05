@@ -114,7 +114,9 @@ def format_field_to_whom(obj) -> str:
 
     if ' ' in obj:
         obj = obj.split()
-        if '.' in obj[0]:
+        if len(obj) == 3:
+            return obj[0] + " " + obj[1] + " " + obj[2]
+        elif '.' in obj[0]:
             return obj[1] + " " + obj[0]
         else:
             return obj[0] + " " + obj[1]

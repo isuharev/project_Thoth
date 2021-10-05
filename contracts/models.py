@@ -89,4 +89,4 @@ class Contract(models.Model):
         return self.departament
 
     def get_absolute_url(self):
-        return reverse('contract')
+        return reverse('detail', args=[str(self.id)])

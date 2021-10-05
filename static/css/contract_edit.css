@@ -1,5 +1,5 @@
 .form__wrapper {
-    width: 300px;
+    width: 400px;
     margin: 20px auto;
     border-radius: 5px;
     font-size: 16px;
@@ -17,22 +17,24 @@
 .fieldWrapper > label {
     padding: 8px 16px 8px 0;
     flex: 1;
-}
-
-.fieldWrapper > input {
-  flex: 2;*
-  margin:10px 0;
-  padding:10px;
-  border-radius:10px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  transition: .3s box-shadow;
-  border: none;
+    font-weight: bold;
+    text-align: left;
 }
 
 .fieldWrapper > select {
   flex: 2;*
   width: 100%;
   padding:15px;
+  border-radius:10px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition: .3s box-shadow;
+  border: none;
+}
+
+.fieldWrapper > input {
+  flex: 2;*
+  margin:10px 0;
+  padding:10px;
   border-radius:10px;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   transition: .3s box-shadow;

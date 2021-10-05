@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'bootstrap3',
-    # 'simple_history',
+    'simple_history',
 ]
 
 MIDDLEWARE = [
@@ -45,7 +45,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'simple_history.middleware.HistoryRequestMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'journal_db.urls'
