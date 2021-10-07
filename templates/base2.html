@@ -1,0 +1,64 @@
+<!-- templates/base.html -->
+{% load static %}
+
+
+<html>
+
+  <head>
+    <title>Журнал</title>
+      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
+      <link href="{% static 'css/base.css' %}" rel="stylesheet">
+      <link rel="shortcut icon" type="image/png" href="{% static "favicon.ico" %}">
+  </head>
+
+  <body>
+    {% if user.is_authenticated %}
+
+<!--        <header>-->
+<!--            <div class="nav-left">-->
+<!--                <h1><a href="{% url 'home' %}" class="hyperlink">Журнал регистрации документов</a></h1>-->
+<!--                <h1><a href="{% url 'reports' %}" class="hyperlink">Журнал регистрации отчётных документов</a></h1>-->
+<!--                <h1><a href="{% url 'contract' %}" class="hyperlink">Журнал договоров</a></h1>-->
+<!--            </div>-->
+
+<!--            <div class="nav-right">-->
+<!--                <ul id="add_bar">-->
+<!--                    <li><a href="{% url 'admin:index' %}" class="hyperlink">Администрирование</a></li>-->
+<!--                    <li><a class="hyperlink">Добавить новый</a>-->
+<!--                        <ul>-->
+<!--                            <li><a href="{% url 'new_entry' %}" class="hyperlink">Документ</a></li>-->
+<!--                            <li><a href="{% url 'new_report' %}" class="hyperlink">Отчётный документ</a></li>-->
+<!--                            <li><a href="{% url 'new_contract' %}" class="hyperlink">Договор</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li><a href="{% url 'logout' %}" class="hyperlink">Выйти</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </header>-->
+        <ul class="m-menu">
+
+            <li><a href="#index" class="hyperlink">Главная</a></li>
+            <li>
+                <a href="#product" class="hyperlink">Продукция</a>
+                <ul class="s-menu">
+                    <li><a href="#1" class="hyperlink">Конфеты</a></li>
+                    <li><a href="#2" class="hyperlink">Торты</a></li>
+                    <li><a href="#3" class="hyperlink">Печенье</a></li>
+                </ul>
+            </li>
+            <li><a href="#adress" class="hyperlink">Контакты</a></li>
+
+        </ul>
+
+        <div align="center">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    {% else %}
+        <header>
+            <p>Вы не вошли в систему. Ваш доступ к просмотру или редактированию журнала ограничен.</p>
+        </header>
+        <a href="{% url 'login' %}" class="hyperlink">Войти в систему</a>
+    {% endif %}
+  </body>
+</html>

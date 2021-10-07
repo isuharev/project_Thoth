@@ -17,26 +17,12 @@
   font-size: 12px;
 }
 
-.btn {
-  margin:10px 0;
-  padding:10px;
-  border-radius:10px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  transition: .3s box-shadow;
-  border: none;
+.doclink:hover {background-size: 100%;}
+
+.hyperlink {
+  box-shadow: none;
 }
 
-.btn:focus {
-  background-color: white;
-  border-color: white;
-}
-
-.btn:hover {
-  background-color: white;
-  border-color: white;
-}
-
-.doclink:hover {background-size: 100% 100%;}
 </style>
 
 
@@ -150,6 +136,12 @@
 	</td>
   </tr>
 
+	    <tr>
+	<td class="header" colspan="2">
+		<a href="{% url 'contract_edit' contract.pk %}" class="hyperlink">Редактировать</a>
+	</td>
+  </tr>
+
 </table>
-<a href="{% url 'contract_edit' contract.pk %}">Редактировать</a>
+
 {% endblock content %}

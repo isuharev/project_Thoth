@@ -1,9 +1,9 @@
+from django.contrib.contenttypes.models import ContentType
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView, DetailView, UpdateView
 from .forms import NewContractForm, EditContractForm
 from .models import Contract
 from .utils import *
-import datetime
 
 
 # TODO!!!!!! Это заглушки для отображения таблицы договоров и формы добавления договора
@@ -56,7 +56,6 @@ class ContractUpdateView(UpdateView):
 
     def form_valid(self, form):
         obj = form.save(commit=False)
-        # print(obj.contract_full_name)
         obj.author = self.request.user
         obj.contract_full_name = get_contract_name(obj)
         obj.save()

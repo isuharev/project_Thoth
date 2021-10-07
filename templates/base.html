@@ -1,55 +1,121 @@
-<!-- templates/base.html -->
 {% load static %}
-
-
 <html>
 
-  <head>
-    <title>Журнал</title>
+<style>
+    body {
+    margin: 5px;
+    padding: 5px;
+    font-size: 24px;
+    background: linear-gradient(#eae5c9, #6cc6cb) fixed;
+}
+
+a {
+text-decoration: none;
+transition: .3s ease-in-out;
+}
+
+.m-menu {
+    z-index: 2;
+    margin: 0;
+    padding: 9px;
+    width:60%;
+    text-align:center;
+    border-bottom: 1px solid #000;
+}
+.m-menu > li {
+    position: relative;
+    display: inline-block;
+ }
+
+.m-menu a {
+    background-color: rgba(255, 255, 255, .9);
+    display: block;
+    margin-left: -2px;
+    padding: 13px;
+    color: black;
+    transition: .3s ease-in-out;
+    text-decoration: none;
+    text-align:left;
+}
+
+.m-menu .s-menu {
+    z-index: 1;
+    left: 10px;
+    position: absolute;
+    display: none;
+    width: 155px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.m-menu > li:hover .s-menu {
+    display: block;
+}
+
+.hyperlink {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  border-bottom: 2px solid #5be;
+  color: #555;
+  background-image: linear-gradient(180deg, transparent 65%, #5bf 65%);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 0;
+}
+.hyperlink:hover {background-size: 100% 100%;}
+
+div {
+z-index: 0;
+}
+
+</style>
+<head>
+    <meta charset="utf-8">
+    <title>Документооборот</title>
       <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
-      <link href="{% static 'css/base.css' %}" rel="stylesheet">
       <link rel="shortcut icon" type="image/png" href="{% static "favicon.ico" %}">
-  </head>
+</head>
 
-  <body>
+    <body>
     {% if user.is_authenticated %}
-
         <header>
-            <div class="nav-left">
-                <h1><a href="{% url 'home' %}" class="hyperlink">Журнал регистрации документов</a></h1>
-                <h1><a href="{% url 'reports' %}" class="hyperlink">Журнал регистрации отчётных документов</a></h1>
-                <h1><a href="{% url 'contract' %}" class="hyperlink">Журнал договоров</a></h1>
-            </div>
-
-            <div class="nav-right">
-                <ul id="add_bar">
-                    <li><a href="{% url 'admin:index' %}" class="hyperlink">Администрирование</a></li>
-                    <li><a class="hyperlink">Добавить новый</a>
-                        <ul>
-                            <li><a href="{% url 'new_entry' %}" class="hyperlink">Документ</a></li>
-                            <li><a href="{% url 'new_report' %}" class="hyperlink">Отчётный документ</a></li>
-                            <li><a href="{% url 'new_contract' %}" class="hyperlink">Договор</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="{% url 'logout' %}" class="hyperlink">Выйти</a></li>
+        <div align="center" class="main_menu">
+        <ul class="m-menu">
+            <li><a href="{% url 'home' %}" class="hyperlink">Главная</a></li>
+            <li>
+                <a href="#Journals" class="hyperlink">Журналы</a>
+                <ul class="s-menu">
+                    <li><a href="{% url 'home' %}" class="hyperlink">Регистрации документов</a></li>
+                    <li><a href="{% url 'contract' %}" class="hyperlink">Регистрации договоров</a></li>
+                    <li><a href="{% url 'reports' %}" class="hyperlink">Регистрации отчётных документов</a></li>
                 </ul>
-            </div>
+            </li>
+            <li><a href="#New"class="hyperlink" >Добавить новый</a>
+                 <ul class="s-menu">
+                    <li><a href="{% url 'new_entry' %}" class="hyperlink">Документ</a></li>
+                    <li><a href="{% url 'new_contract' %}" class="hyperlink">Договор</a></li>
+                    <li><a href="{% url 'new_report' %}" class="hyperlink">Отчётный документ</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'admin:index' %}" class="hyperlink" >Администрирование</a></li>
+            <li><a href="{% url 'logout' %}" class="hyperlink" >Выйти</a></li>
+        </ul>
+        </div>
         </header>
-
-        <div align="center">
+        <div align="center" class="content">
             {% block content %}
             {% endblock content %}
         </div>
     {% else %}
-
         <header>
-            <div class="nav-left">
-                <h1><a href="{% url 'home' %}" class="hyperlink">Журнал регистрации документов</a></h1>
-                <h1><a href="{% url 'contract' %}" class="hyperlink">Журнал договоров</a></h1>
-            </div>
+            <p>Вы не вошли в систему. Ваш доступ к просмотру или редактированию журнала ограничен.</p>
         </header>
-        <p>Вы не вошли в систему. Ваш доступ к просмотру или редактированию журнала ограничен.</p>
+    <div align="center" class="main_menu">
+    <ul class="m-menu">
+        <li>
         <a href="{% url 'login' %}" class="hyperlink">Войти в систему</a>
+        </li>
+    </ul>
+    </div>
     {% endif %}
-  </body>
+    </body>
 </html>
