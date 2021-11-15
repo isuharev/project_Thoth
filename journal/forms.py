@@ -10,8 +10,6 @@ class TimeInput(forms.TimeInput):
     input_type = 'time'
 
 
-# тут созданы виджеты для полей даты и времени
-# TODO: понять до конца, как это работает
 class NewEntryForm(forms.ModelForm):
     number_out = forms.CharField(widget=forms.TextInput())
 
@@ -21,3 +19,18 @@ class NewEntryForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(NewEntryForm, self).__init__(*args, **kwargs)
+
+
+class EditEntryForm(forms.ModelForm):
+
+    class Meta:
+        model = Entry
+        fields = ['number_out',
+                  'to_whom',
+                  'what',
+                  'executor',
+                  'departament',
+                  ]
+
+    def __init__(self, *args, **kwargs):
+        super(EditEntryForm, self).__init__(*args, **kwargs)

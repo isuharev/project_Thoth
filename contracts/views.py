@@ -6,8 +6,6 @@ from .models import Contract
 from .utils import *
 
 
-# TODO!!!!!! Это заглушки для отображения таблицы договоров и формы добавления договора
-# TODO их нужно будет наполнить собственной логикой
 class ContractsView(ListView):
 
     model = Contract
@@ -27,7 +25,7 @@ class AddNewContactView(CreateView):
         obj.departament = "Не указан"
         print(obj.contract_date)
         obj.contract_full_name = get_contract_name(obj)
-        obj.save()
+        # obj.save()
         return super(AddNewContactView, self).form_valid(form)
 
 
@@ -58,5 +56,5 @@ class ContractUpdateView(UpdateView):
         obj = form.save(commit=False)
         obj.author = self.request.user
         obj.contract_full_name = get_contract_name(obj)
-        obj.save()
+        # obj.save()
         return super(ContractUpdateView, self).form_valid(form)

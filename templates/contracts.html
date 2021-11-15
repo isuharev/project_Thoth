@@ -22,18 +22,6 @@
 * {
   box-sizing: border-box;
 }
-.contract_link {
-    font-size: 14px;
-   border-bottom: 2px solid #5be;
-   color: #555;
-   background-image: linear-gradient(180deg, transparent 65%, #5bf 65%);
-   background-position: 0% 100%;
-   background-repeat: no-repeat;
-   background-size: 100% 0%;
-}
-.contract_link:hover {
-   background-size: 100% 100%;
-}
 
 .table_sort table {
     border-collapse: collapse;
@@ -142,7 +130,7 @@ document.querySelectorAll('.table_sort thead').forEach(tableTH => tableTH.addEve
     <tbody>
     {% for item in object_list %}
         <tr>
-            <td><a href="{% url 'detail' item.pk %}" class="contract_link">{{ item.contract_full_name }}</a></td>
+            <td><a href="{% url 'detail' item.pk %}" class="link_in_table">{{ item.contract_full_name }}</a></td>
             <td>{{ item.number }}</td>
             <td>{{ item.contract_date|default:"Не указана"  }}</td>
             <td>{{ item.contract_agent }}</td>
@@ -153,28 +141,4 @@ document.querySelectorAll('.table_sort thead').forEach(tableTH => tableTH.addEve
     {% endfor %}
     </tbody>
 </table>
-<!--
-<table class="table_sort">
-    <tr>
-        <th>Договор</th>
-        <th>№ договора</th>
-        <th>Дата заключения</th>
-        <th>Контрагент</th>
-        <th>Стоимость</th>
-        <th>Статус</th>
-        <th>Автор регистрации</th>
-    </tr>
-    {% for item in object_list %}
-    <tr>
-            <td><a href="{% url 'detail' item.pk %}" class="contract_link">{{ item.contract_full_name }}</a></td>
-            <td>{{ item.number }}</td>
-            <td>{{ item.contract_date|default:"Не указана"  }}</td>
-            <td>{{ item.contract_agent }}</td>
-            <td>{{ item.contract_cost }}</td>
-            <td>{{ item.contract_status }}</td>
-            <td>{{ item.author }}</td>
-    </tr>
-    {% endfor %}
-</table>
--->
 {% endblock content %}

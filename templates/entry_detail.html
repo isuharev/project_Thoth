@@ -1,0 +1,44 @@
+<!-- templates/post_detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+
+<table id="DocumentsTable" >
+  <tr>
+	<td class="header" colspan="2">Данные по документу: {{entry.number_out}}</td>
+  </tr>
+
+  <tr>
+	<td>№ Исх.</td>
+	<td>{{entry.number_out}}</td>
+  </tr>
+
+  <tr>
+	<td>Кому</td>
+	<td>{{entry.to_whom}}</td>
+  </tr>
+
+  <tr>
+	<td>Содержание</td>
+	<td>{{entry.what}}</td>
+  </tr>
+
+  <tr>
+	<td>Исполнитель</td>
+	<td>{{entry.executor}}</td>
+  </tr>
+
+  <tr>
+	<td>Отдел</td>
+	<td>{{entry.departament}}</td>
+  </tr>
+	<tr>
+	<td class="header" colspan="2"><a href="{% url 'entry_edit' entry.pk %}" class="link_in_table">Редактировать</a></td>
+  </tr>
+
+</table>
+
+{% endblock content %}

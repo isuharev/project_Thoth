@@ -1,7 +1,7 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.views.generic.edit import CreateView
 from .models import Entry
-from .forms import NewEntryForm
+from .forms import NewEntryForm, EditEntryForm
 from .utils import *
 
 
@@ -49,6 +49,35 @@ class JournalNewEntry(CreateView):
         # Считаем адрес пользователя
         # obj.user_ip = self.request.META.get('REMOTE_ADDR')
         obj.user_ip = get_user_ip(self.request)
-        obj.save()
+        # obj.save()
 
         return super(JournalNewEntry, self).form_valid(form)
+
+
+class JournalDetailView(DetailView):
+    model = Entry
+    form_class = NewEntryForm
+    template_name = 'entry_detail.html'
+
+
+class EntryUpdateView(UpdateView):
+    model = Entry
+    form_class = EditEntryForm
+    template_name = 'entry_edit.html'
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.author = self.request.user
+
+        obj.departament = self.request.POST['departament']
+
+        obj.number = obj.number
+
+        obj.number_out = self.request.POST['number_out']
+
+        obj.to_whom = format_field_to_whom(obj.to_whom)
+
+        obj.user_ip = get_user_ip(self.request)
+        # obj.save()
+
+        return super(EntryUpdateView, self).form_valid(form)

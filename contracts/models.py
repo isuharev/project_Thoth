@@ -2,6 +2,9 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.urls import reverse
 from django.db import models
+from changelog.mixins import ChangeloggableMixin
+from changelog.signals import journal_save_handler, journal_delete_handler
+from django.db.models.signals import post_delete, post_save
 import hashlib
 import os
 
@@ -29,8 +32,7 @@ class OverwriteStorage(FileSystemStorage):
         return name
 
 
-class Contract(models.Model):
-
+class Contract(ChangeloggableMixin, models.Model):
     # Порядковый номер договора
     number = models.CharField("№", max_length=300, default='')
 
@@ -59,7 +61,7 @@ class Contract(models.Model):
     contract_index = models.CharField("Индекс", max_length=3, default='', blank=True)
 
     # Код отдела
-    departament_code = models.CharField("Код отдела",  max_length=100, default='')
+    departament_code = models.CharField("Код отдела", max_length=100, default='')
 
     # Полное название договора
     contract_full_name = models.CharField("Полное название договора", max_length=200, default='')
@@ -82,11 +84,15 @@ class Contract(models.Model):
 
     # Переопредилим название модели на панели администратора
     class Meta:
-        verbose_name = 'Договор'     # Для единственного числа
-        verbose_name_plural = 'Договоры'      # Для множественного числа
+        verbose_name = 'Договор'  # Для единственного числа
+        verbose_name_plural = 'Договоры'  # Для множественного числа
 
     def __str__(self):
         return self.departament
 
     def get_absolute_url(self):
         return reverse('detail', args=[str(self.id)])
+
+
+post_save.connect(journal_save_handler, sender=Contract)
+post_delete.connect(journal_delete_handler, sender=Contract)

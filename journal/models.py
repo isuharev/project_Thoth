@@ -1,10 +1,12 @@
 from django.db import models
 from django.urls import reverse
 from simple_history.models import HistoricalRecords
-import datetime
+from changelog.mixins import ChangeloggableMixin
+from changelog.signals import journal_save_handler, journal_delete_handler
+from django.db.models.signals import post_delete, post_save
 
 
-class Entry(models.Model):
+class Entry(ChangeloggableMixin, models.Model):
     """
     Этот класс описывает модель записи в журнал регистрации документов.
     Она описывает поля, содержащиеся в этой модели (т.е. фактически создаёт соотвествующие столбцы в базе данных)
@@ -56,3 +58,7 @@ class Entry(models.Model):
     # Вроде как она позволяет отсылаться к определённому объекту через название его URL маршрута
     def get_absolute_url(self):
         return reverse('home')
+
+
+post_save.connect(journal_save_handler, sender=Entry)
+post_delete.connect(journal_delete_handler, sender=Entry)

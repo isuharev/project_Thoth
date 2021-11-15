@@ -6,140 +6,76 @@
 {% block content %}
 <link href="{% static 'css/home.css' %}" rel="stylesheet">
 
-<style>
-.doclink {
-  border-bottom: 2px solid #5be;
-  color: #555;
-  background-image: linear-gradient(180deg, transparent 65%, #5bf 65%);
-  background-position: 0% 100%;
-  background-repeat: no-repeat;
-  background-size: 100% 0%;
-  font-size: 12px;
-}
-
-.doclink:hover {background-size: 100%;}
-
-.hyperlink {
-  box-shadow: none;
-}
-
-</style>
-
-
 <table id="DocumentsTable" >
   <tr>
-	<td class="header" colspan="2">
-		Данные по договору: {{contract.contract_full_name}}
-	</td>
+	<td class="header" colspan="2">Данные по договору: {{contract.contract_full_name}}</td>
   </tr>
   <tr>
-	<td>
-		Дата подписания договора
-	</td>
-	<td>
-		{{contract.contract_date}}
-	</td>
+	<td>Дата подписания договора</td>
+	<td>{{contract.contract_date}}</td>
   </tr>
 
 	  <tr>
-	<td>
-		Полный номер договора
-	</td>
-	<td>
-		{{contract.departament_code}}-{{contract.contract_index}}-{{contract.number}}
-	</td>
+	<td>Полный номер договора</td>
+	<td>{{contract.departament_code}}-{{contract.contract_index}}-{{contract.number}}</td>
   </tr>
 
   <tr>
-	<td>
-		Порядковый номер договора
-	</td>
-	<td>
-		{{contract.number}}
-	</td>
+	<td>Порядковый номер договора</td>
+	<td>{{contract.number}}</td>
   </tr>
 
     <tr>
-	<td>
-		Индекс по номенклатуре дел
-	</td>
-	<td>
-		{{contract.contract_index}}
-	</td>
+	<td>Индекс по номенклатуре дел</td>
+	<td>{{contract.contract_index}}</td>
   </tr>
 
 	<tr>
-	<td>
-		Исполнитель
-	</td>
-	<td>
-		{{contract.executor}}
-	</td>
+	<td>Исполнитель</td>
+	<td>{{contract.executor}}</td>
   </tr>
+
 		<tr>
-	<td>
-		Стоимость
-	</td>
-	<td>
-		{{contract.contract_cost}}
-	</td>
+	<td>Контрагент</td>
+	<td>{{contract.contract_agent}}</td>
+  </tr>
+
+		<tr>
+	<td>Стоимость</td>
+	<td>{{contract.contract_cost}}</td>
   </tr>
 
 	<tr>
-	<td>
-		Текущий статус договора
-	</td>
-	<td>
-		{{contract.contract_status}}
-	</td>
+	<td>Текущий статус договора</td>
+	<td>{{contract.contract_status}}</td>
   </tr>
 	{% if contract.document %}
 		<tr>
-	<td>
-		Файл договора
-	</td>
-	<td>
-		<a href="/media/{{contract.document}}" class="doclink">{{contract.document}}</a>
-	</td>
+	<td>Файл договора</td>
+	<td><a href="/media/{{contract.document}}" class="link_in_table">{{contract.document}}</a></td>
   </tr>
 	{% endif %}
     <tr>
-	<td class="header" colspan="2">
-		Служебная информация:
-	</td>
+	<td class="header" colspan="2">Служебная информация:</td>
   </tr>
 
   <tr>
-	<td>
-		Дата регистрации договора
-	</td>
-	<td>
-		{{contract.registration_date}}
-	</td>
+	<td>Дата регистрации договора</td>
+	<td>{{contract.registration_date}}</td>
   </tr>
 
   <tr>
-	<td>
-		Код отдела
-	</td>
-	<td>
-		{{contract.departament_code}}
-	</td>
+	<td>Код отдела</td>
+	<td>{{contract.departament_code}}</td>
   </tr>
 
   <tr>
-	<td>
-		Автор регистрации договора
-	</td>
-	<td>
-		{{contract.author}}
-	</td>
+	<td>Автор регистрации договора</td>
+	<td>{{contract.author}}</td>
   </tr>
 
-	    <tr>
-	<td class="header" colspan="2">
-		<a href="{% url 'contract_edit' contract.pk %}" class="hyperlink">Редактировать</a>
-	</td>
+  <tr>
+	<td class="header" colspan="2"><a href="{% url 'contract_edit' contract.pk %}" class="hyperlink">Редактировать</a></td>
   </tr>
 
 </table>

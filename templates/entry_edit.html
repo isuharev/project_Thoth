@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link href="{% static 'css/contract_edit.css' %}" rel="stylesheet">
+<h1>Редактирование документа {{contract.contract_full_name}}</h1>
+<div class="form__wrapper">
+    <form action="" method="post">
+        {% csrf_token %}
+        <ul class="main">
+
+            <li class="fieldWrapper">
+                <label for="number_out">№ Исх.</label>
+                <input id="number_out" type="text" name="number_out" value="{{entry.number_out}}">
+            </li>
+
+            <li class="fieldWrapper">
+                <label for="to_whom">Кому</label>
+                <input id="to_whom" type="text" name="to_whom" value="{{entry.to_whom}}">
+            </li>
+
+            <li class="fieldWrapper">
+                <label for="what">Содержание</label>
+                <input id="what" type="text" name="what" value="{{entry.what}}">
+            </li>
+
+            <li class="fieldWrapper">
+                <label for="executor">Исполнитель</label>
+                <input id="executor" type="text" name="executor" value="{{entry.executor}}">
+            </li>
+
+            <li class="fieldWrapper">
+                <label for="departament">Отдел</label>
+                <select id="departament" name="departament">
+                    <option selected="selected" value="{{entry.departament}}">{{entry.departament}}</option>
+                    <option  value="Гравиметрии">Гравиметрии</option>
+                    <option  value="Геодинамики">Геодинамики</option>
+                    <option  value="Геодезии">Геодезии</option>
+                    <option  value="Космической геодезии">Космической геодезии</option>
+                    <option  value="не указан">не указан</option>
+                </select>
+            </li>
+
+            <li class="fieldWrapper">
+                <input type="submit" value="Подтвердить" />
+            </li>
+        </ul>
+</form>
+</div>
+{% endblock content %}

@@ -107,7 +107,7 @@ function sortTable(n) {
             <td>{{ item.number }}</td>
             <td>{{ item.reg_date }}</td>
             <td>{{ item.reg_time }}</td>
-            <td>{{ item.number_out }}</td>
+            <td><a href="{% url 'journal_detail' item.pk %}" class="link_in_table">{{ item.number_out }}</a></td>
             <td>{{ item.to_whom }}</td>
             <td class="toleftedge">{{ item.what }}</td>
             <td class="toleftedge">{{ item.executor }}</td>
