@@ -1,8 +1,18 @@
 from django.contrib import admin
 from .models import Contract
+from import_export import resources
+from import_export.admin import ExportMixin
 
 
-class PostAdmin(admin.ModelAdmin):
+class ContractResource(resources.ModelResource):
+
+    class Meta:
+        model = Contract
+
+
+class PostAdmin(ExportMixin, admin.ModelAdmin):
+
+    resource_class = ContractResource
 
     # Отобразим поля модели в заголовке таблички на странице договоров (по имени полей в модели)
     list_display = ('contract_full_name', 'contract_date', 'executor', 'author', 'registration_date')
