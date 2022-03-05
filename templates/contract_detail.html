@@ -75,7 +75,12 @@
   </tr>
 
   <tr>
-	<td class="header" colspan="2"><a href="{% url 'contract_edit' contract.pk %}" class="hyperlink">Редактировать</a></td>
+	<td class="header" colspan="2">
+	<a href="{% url 'contract_edit' contract.pk %}" class="link_in_table">Редактировать</a></td>
+  </tr>
+
+		<td class="header" colspan="2">
+		<a href="{% url 'contract'%}" class="link_in_table">Назад к журналу</a></td>
   </tr>
 
 </table>

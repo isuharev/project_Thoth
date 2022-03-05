@@ -36,8 +36,9 @@ def journal_save_handler(sender, instance, created, **kwargs):
 def journal_delete_handler(sender, instance, using, **kwargs):
     if isinstance(instance, ChangeloggableMixin):
         loggedIn = LoggedInUser()
+        old = instance._original_values
         last_saved = get_last_saved(loggedIn.request, instance)
-        ChangeLog.add(instance, loggedIn.current_user, loggedIn.address, ACTION_DELETE, {}, id=last_saved['id'])
+        ChangeLog.add(instance, loggedIn.current_user, loggedIn.address, ACTION_DELETE, old, {}, id=last_saved['id'])
 
 
 def json_dumps(value):
